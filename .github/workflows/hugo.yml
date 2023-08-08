@@ -32,7 +32,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      HUGO_VERSION: 0.115.4
+      HUGO_VERSION: 0.117.0
     steps:
       - name: Install Hugo CLI
         run: |
@@ -56,6 +56,7 @@ jobs:
           HUGO_ENVIRONMENT: production
           HUGO_ENV: production
         run: |
+          cd ds-with-mac
           hugo \
             --gc \
             --minify \
@@ -63,7 +64,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
-          path: ./public
+          path: ./ds-with-mac/public
 
   # Deployment job
   deploy:
