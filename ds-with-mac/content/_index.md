@@ -1,7 +1,7 @@
 ---
 title: Welcome to DS with marc
-subtitle: I'm a Data Scientist turned Product Manager, that works with ML / AI powered data products. On this website a will share my thoughs, learning and inspirations. All opinions here are my own.
-seo_title: Hugo Liftoff | Hugo theme for creators
+subtitle: I'm a Data Scientist turned Product Manager, that works with ML / AI powered data products. On this website I will share my thoughs, learning and inspirations. All opinions here are my own.
+seo_title: DS with Marc | A blog about data products
 
 primary_cta_page: "about"
 secondary_cta_page: "posts"
