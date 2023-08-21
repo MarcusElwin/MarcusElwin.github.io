@@ -343,11 +343,14 @@ In a real-world setting input data and model output will change (it is not *stat
 ![Drift](/drift.png "Example of data drift or label shift where income distribution in a certain market has drifted to the left between two different time periods, from low income to more people with high income. This can be due to natural reasons such as improved living standards, but needs to be handle by a ML system built for e.g. predicting income or using income as a feature.")
 
 Drift for a given input dataset and model output can be due to many various reasons:
+
+{{< notice note >}} 
 * Bugs in production or ML code.
 * Changes or failures in *upstream* dependencies such as data producer used to create a dataset, modified schema, missing data etc.
 * Changes created by the introduction of a ML model, in e.g. targeted marketing with *propensity modelling* you may effect the actions of person to do something they would not normally do (also called *degenerative* feedback loops).
 * Production data is different from what was used during training.
 * Unknown or not handled *edge-cases* or *outliers* such as the recent COVID-19 pandemic, i.e. it is proably not normal for people to hoarding toilet paper.
+{{< /notice >}}
 
 Due to the cases above we need ways of identifying when data is *drifting* from a previous state, to take any appropriate actions such as:
 * Re-training a model
