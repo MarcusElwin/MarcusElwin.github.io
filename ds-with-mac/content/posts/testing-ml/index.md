@@ -8,7 +8,7 @@ author: Marcus Elwin
 
 draft: false
 date: 2023-08-20T12:58:11+02:00
-lastmod: 
+lastmod: 2023-08-21T08:50:11+02:00
 expiryDate: 
 publishDate: 
 
@@ -29,7 +29,7 @@ newsletter: true
 disable_comments: false
 ---
 
-So you have secured data :tada: for your model and trained it with `model.train`, and maybe you have evaluated its performance on a *hold-out* test set or potential done an `A/B-test`. However, how do you know that your model will work, when deployed? 
+So you have secured data :tada: for your model and trained it with `model.train`, and maybe you have evaluated its performance on a *hold-out* test set or potentially done an `A/B-test`. However, how do you know that your model will work, when deployed? 
 
 Can you ensure that your model still works after some slight changes in input data? In this article we will cover some considerations for how you can test your ML system to mitigate and take any relevant actions before and after you have deployed your model. 
 
@@ -49,17 +49,17 @@ The image below shows a high-level overview of what an *ML-system* is:
 ![ML System](/ml-system.png "Overview of ML System adopted from Huyen, C. (2022). Designing machine learning systems.")
 
 Starting with the *input* part of the system, one can see the following components:
-* *ML System users*: this can be both external and internal such as end-users or internal teams.
+* *ML System users*: this can be both external and internal such as end-users or internal teams or other *ML systems*.
 * *Business Requirements*: depending on the company this might be from a *product manager*, *business translator* or other internal *stakeholders* as e.g. marketing.
 * *ML System developers*: different roles such as *ML Engineer*, *AI Engineer*, *Data Scientist*, *Data Engineer* or *Software Developer*.
 
-As popularized by Google in their 2015 paper [Hidden Technical Debt in Machine Learning Systems](https://proceedings.neurips.cc/paper_files/paper/2015/file/86df7dcfd896fcaf2674f757a2463eba-Paper.pdf) the actual ML algorithm is a quite small component of the entire system. You may have heard that data scientists tend to spend >= 20% of their time on actual modelling, and < 80% of their time on other activities such as cleaning of data (this of course varies between different companies). 
+As popularized by Google in their 2015 paper [Hidden Technical Debt in Machine Learning Systems](https://proceedings.neurips.cc/paper_files/paper/2015/file/86df7dcfd896fcaf2674f757a2463eba-Paper.pdf) the actual ML algorithm is a quite small component of the entire system. You may have heard that data scientists tend to spend >= 20% of their time on actual modelling, and <= 80% of their time on other activities such as cleaning of data (this of course varies between different companies). 
 
 Whilst *infrastructure*, *data*, *feature engineering*, *evaluation* and *deployment* are all **vital** components, especially when going from experimentation all the way to production. This is probably one of the reasons why *ML Engineering* has been so populare in the recent years. In my experience the E2E system design should be thought of already in the earlier stages of developing a ML system to ensure sucess of a ML project. 
 
-On another note, here we use the term *ML System* but you might have also heard:
+On another note, here we use the term *ML System* but you might have also heard *data product*:
 
-> Some might also call a ML system as a **data product**
+> Some might also call a ML system a **data product**
 
 In my experience talking *purely* about the deployed ML model some of these components are important to include in your *testing* scope:
 * Data
@@ -67,6 +67,7 @@ In my experience talking *purely* about the deployed ML model some of these comp
 * Evaluation 
 * ML algorithm 
 
+However, best practice is to test as much as you can.
 
 ## Why test a ML system?
 
@@ -108,6 +109,8 @@ Some of these tests that I've been using:
 
 What I have been planning to add as test in the future:
 1) Check that one training step of your model reduces the loss
+
+The test above is also a good *sanity check* step if you are dealing with *deep learning* models as part of your training process.
 
 [^2]: Assertions such as checking for *NULL*, *NaN* values, scaling of your dataset, unique values etc.
 [^3]: *Label Leakage* is when we leak infomation from the training dataset to test or validation sets.
@@ -174,7 +177,7 @@ def test_no_user_leakage_all_sets_data_split(self):
 {{< / highlight >}}
 
 ## Post-training test(s)
-These type of tests do normally fall into two different groups: *invariance tests* & *directional expectation tests*. it is not uncommon that input data might slightly change over time. One example could be *income distribution* in a country that is changing due to a growing middle class. Other examaples are e.g. test data such as transactional descriptions / narratives changes. Also note that for these test to make sense we need an actual *trained* model.
+These type of tests do normally fall into two different groups: *invariance tests* & *directional expectation tests*. It is not uncommon that input data might slightly change over time. One example could be *income distribution* in a country that is changing due to a growing middle class. Other examples are e.g. test data such as transactional descriptions / narratives changes. Also note that for these test to make sense we need an actual *trained* model.
 
 ### Invariance test(s)
 Real-world data might change due to various reason as we eluded to previously. These test aims to test how **stable** and **consistent** the ML model is to **pertubations**. Logic for these types of tests, whilst applied to training a model could also be seen as **data augmentation**.
@@ -185,7 +188,7 @@ Some of these tests that I've been using:
 
 Where you can replace *feature* with any feature you would like to test e.g. *text descriptions*, *amount*, *date* etc.
 
-To examplify even further imagine that you have a dataset looking like the below at time *t*:
+To examplify even further, imagine that you have a dataset looking like the below at time *t*:
 
 | Date   | Amount     | Description   |
 | --------  | -------- | ------ |
@@ -200,7 +203,7 @@ Then at time time *t+1* the dataset looks like the below instead:
 | 2023-07-09 | 1700 EUR | AirBnB |
 | 2023-08-10 | 1450 EUR | AirBnB |
 
-:question: Do you notice any changes here in the underlying date? This type of behaviour is something we want to test and make sure that our model learns to handle in order to be considered stable and consistent. 
+:question: Do you notice any changes here in the underlying date? This type of behaviour is something we want to test and make sure that our model learns to handle in order to be considered *stable* and *consistent*. 
 
 I have used [faker](https://faker.readthedocs.io/en/master/) and [factor_boy](https://factoryboy.readthedocs.io/en/stable/) to generate dummy data to setup these tests in the past:
 
@@ -272,7 +275,7 @@ def test_amount_invariance(self):
         delta=0.95 * number_of_records
     )
 {{< / highlight >}}
-Note that we are using the `assertAlmostEqual` here in the test and allow a deviance of `5%` in predictions in this example. If we would not do so, you would see some flaky faild builds in your CI/CD pipeline :tools:.
+Note that we are using the `assertAlmostEqual` here in the test and allow a deviance of `5%` in predictions in this example. If we would not do so, you would see some *flaky* faild builds in your CI/CD pipeline :tools:.
 
 ### Directional Expectations test(s)
 These type of tests allows us to define a set of **pertubations** to the input which should have a predictable effect on the model output. Logic for these types of tests, whilst applied to training a model could also be seen as **data augmentation**.
@@ -333,9 +336,9 @@ Drift for a given input dataset and model output can be due to many various reas
 * Unknown or not handled *edge-cases* or *outliers* such as the recent COVID-19 pandemic, i.e. it is proably not normal for people to hoarding toilet paper.
 
 Due to the cases above we need ways of identifying when data is *drifting* from a previous state, to take any appropriate actions such as:
-* re-training a model
-* adding static rules for edge-cases
-* collecting more data.
+* Re-training a model
+* Adding static rules for edge-cases
+* Collecting more data.
 
 Some of these tests that I've been using:
 
@@ -377,7 +380,8 @@ def test_mean_drift(self):
             )
     self.assertTrue(True)
 {{< / highlight >}}
-If the drift checks should be alerts in another system or parts of your CI pipeline is up to you, the important take away is that you have a process around it and can get alerted either before deployment or after. Much more can be said about *drift-detection* that might be a topic for another post in the future. 
+
+You can of course replace *mean* with any other statistical metric such as *median*, *variance* etc. If the drift checks should be alerts in another system or parts of your CI pipeline is up to you, the important take away is that you have a process around it and can get alerted either before deployment or after. Much more can be said about *drift-detection* that might be a topic for another post in the future. 
 
 In the meantime if you are more interested I recommend: 
 * *Chapter 8* of :book: *Designing machine learning systems* by Chip Hueyn that provides a good overview.
