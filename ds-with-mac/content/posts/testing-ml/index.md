@@ -39,10 +39,12 @@ This post has been inspired by some previous work such as:
 
 ## What is an ML system?
 
-> ...The algorithm is only a small part of an ML system in production. The system also includes the business requierments...the interface where users and developers interact...the data stack, and the logic for developing, monitoring & updating your models, as well as the infrastructure. 
-> — <cite>Chip Hueyn[^1]</cite>
+{{< notice note >}} 
+...The algorithm is only a small part of an ML system in production. The system also includes the business requierments...the interface where users and developers interact...the data stack, and the logic for developing, monitoring & updating your models, as well as the infrastructure. 
+— <cite>Chip Hueyn[^1]</cite>
 
 [^1]: The above quote is excerpted from Huyen, C. (2022). Designing machine learning systems.
+{{< /notice >}}
 
 The image below shows a high-level overview of what an *ML-system* is:
 
@@ -59,7 +61,10 @@ Whilst *infrastructure*, *data*, *feature engineering*, *evaluation* and *deploy
 
 On another note, here we use the term *ML System* but you might have also heard *data product*:
 
-> Some might also call a ML system a **data product**
+{{< notice note >}} 
+Some might also call a ML system a **data product**. 
+{{< /notice >}}
+
 
 In my experience talking *purely* about the deployed ML model some of these components are important to include in your *testing* scope:
 * Data
@@ -92,28 +97,33 @@ For a system of type (1) above testing usually boils down to:
 * *Smoke-testing*: testing if a software is stable or not.
 * *Feature-testing*: functional testing of different features in a software.
 
-> It is not uncommon that a ML system also have additional SW components for e.g. rules, where some of these tests would also be of importance.
+{{< notice note >}} 
+It is not uncommon that a ML system also have additional SW components for e.g. rules, where some of these tests would also be of importance.
+{{< /notice >}}
 
 Tests for (2) will be covered in the following sections.
 
 ## Pre-training test(s)
 These type of tests are used as different *sanity* checks to identify bugs early on in the development process of a ML system. As these tests can be ran withouth having a train model, we can use this to *short-circuit* training. Main goal here is to identify **errors** or **bugs** to avoid waisting a training job (cash :moneybag: & time :alarm_clock:). 
 
-Some of these tests that I've been using:
-
+{{< notice tip >}} 
 1) Check shape of model output 
 2) Check shape of model input 
 3) Check output ranges 
 4) Make <cite>assertions[^2]<cite> on your dataset 
 5) Check for <cite>label leakage[^3]</cite> between your datasets
 
+[^2]: Assertions such as checking for *NULL*, *NaN* values, scaling of your dataset, unique values etc.
+[^3]: *Label Leakage* is when we leak infomation from the training dataset to test or validation sets
+{{< /notice >}}
+
 What I have been planning to add as test in the future:
+
+{{< notice tip >}} 
 1) Check that one training step of your model reduces the loss
+{{< /notice >}}
 
 The test above is also a good *sanity check* step if you are dealing with *deep learning* models as part of your training process.
-
-[^2]: Assertions such as checking for *NULL*, *NaN* values, scaling of your dataset, unique values etc.
-[^3]: *Label Leakage* is when we leak infomation from the training dataset to test or validation sets.
 
 Below follows some examples of the mentioned tests:
 
@@ -184,7 +194,9 @@ Real-world data might change due to various reason as we eluded to previously. T
 
 Some of these tests that I've been using:
 
+{{< notice tip >}} 
 1) Assert that model output consistent to small changes in a *feature* of interest.
+{{< /notice >}}
 
 Where you can replace *feature* with any feature you would like to test e.g. *text descriptions*, *amount*, *date* etc.
 
@@ -282,8 +294,10 @@ These type of tests allows us to define a set of **pertubations** to the input w
 
 Some of these tests that I've been using:
 
+{{< notice tip >}} 
 1) Assert that model output is *similar* by increasing a certain *feature* of interest, whilst keeping all other features constant.
 2) Assert that model output is *similar* by decreasing a certain *feature* of interest, whilst keeping all other features constant.
+{{< /notice >}}
 
 Note the use of *similar* above, as we cannot guarante that the model output will be 100% equal in these case instead, on needs to operate on allowable threhsolds e.g. **1-3** standard deviation from the mean or +/- **2,5** p.p. as examples. What you should set as good threhsolds depends on your use case and data.
 
@@ -342,14 +356,18 @@ Due to the cases above we need ways of identifying when data is *drifting* from 
 
 Some of these tests that I've been using:
 
+{{< notice tip >}} 
 1) Test that the distribution of a certain *feature* has not changed *too much* over two time periods.
+{{< /notice >}}
 
 You can replace *feature* with any feature of interest but do note, that we use *test* and *too much* above. This as what it normally boils down to is to evaluate via statistical tests if there has been any *significant* difference in the underlying distribution of the input data or the model predictions. [Albi Detect](https://github.com/SeldonIO/alibi-detect) maintend by the company [Seldon](https://www.seldon.io/) has a quite nice list of drift detection [methods](https://github.com/SeldonIO/alibi-detect#drift-detection).
 
 What I have used before in these scenarios:
+{{< notice tip >}} 
 1) *T-test*
 2) *Kolmogorov-Smirnov test*
 3) *Kullback–Leibler divergence*
+{{< /notice >}}
 
 With a *null hypotehsis* threshold of **0.025 - 0.05** depending on the dataset. Sometimes you may have to use higher thresholds.
 
