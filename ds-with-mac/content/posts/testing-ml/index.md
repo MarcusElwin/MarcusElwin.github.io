@@ -8,7 +8,7 @@ author: Marcus Elwin
 
 draft: false
 date: 2023-08-20T12:58:11+02:00
-lastmod: 2023-08-21T08:50:11+02:00
+lastmod: 2023-08-21T19:34:11+02:00
 expiryDate: 
 publishDate: 
 
@@ -25,7 +25,7 @@ series:
 toc: true
 related: true
 social_share: true
-newsletter: true
+newsletter: false
 disable_comments: false
 ---
 
@@ -79,7 +79,7 @@ Also with the advent of *Large Language Models* (LLMs) which is making the acces
 
 The image below shows some key difference between a *traditional* software system (*software 1.0*) and a ML powered system (*software 2.0*):
 1) In a traditional SW system *data* together with *logic* is used as input to produce a *desired behaviour*. 
-2) IN a ML system *data* together with *desired behaviour* is used to as input to produce some *logic*.
+2) In a ML system *data* together with *desired behaviour* is used to as input to produce some *logic*.
 
 ![SW vs ML System](/sw-vs-ml-system.png "Differences between a traditional SW system and ML system. Note the differences in input and output for the different approaches. Adopted from J. Jordan (2020) Effective testing for machine learning systems.")
 
@@ -275,7 +275,7 @@ def test_amount_invariance(self):
         delta=0.95 * number_of_records
     )
 {{< / highlight >}}
-Note that we are using the `assertAlmostEqual` here in the test and allow a deviance of `5%` in predictions in this example. If we would not do so, you would see some *flaky* faild builds in your CI/CD pipeline :tools:.
+Note that we are using the `assertAlmostEqual` here in the test and allow a deviance of `5%` in predictions in this example. If we would not do so, you would see some *flaky* failed builds in your CI/CD pipeline :tools:.
 
 ### Directional Expectations test(s)
 These type of tests allows us to define a set of **pertubations** to the input which should have a predictable effect on the model output. Logic for these types of tests, whilst applied to training a model could also be seen as **data augmentation**.
