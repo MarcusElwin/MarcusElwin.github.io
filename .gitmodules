@@ -1,3 +1,6 @@
 [submodule "ds-with-mac/themes/hugo-liftoff"]
 	path = ds-with-mac/themes/hugo-liftoff
 	url = https://github.com/wjh18/hugo-liftoff.git
+[submodule "ds-with-mac/themes/hugo-notice"]
+	path = ds-with-mac/themes/hugo-notice
+	url = https://github.com/martignoni/hugo-notice.git
