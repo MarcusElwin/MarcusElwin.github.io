@@ -8,7 +8,7 @@ author: Marcus Elwin
 
 draft: false
 date: 2023-08-20T12:58:11+02:00
-lastmod: 2023-08-21T19:34:11+02:00
+lastmod: 2023-08-23T08:20:11+02:00
 expiryDate: 
 publishDate: 
 
@@ -36,6 +36,8 @@ Can you ensure that your model still works after some slight changes in input da
 This post has been inspired by some previous work such as:
 * :computer: [How to Test Machine Learning Code and Systems](https://eugeneyan.com/writing/testing-ml/)
 * :computer: [Effective testing for machine learning systems](https://www.jeremyjordan.me/testing-ml/)
+
+Also check my [GitHub](https://github.com/MarcusElwin/demo-testing-ml) repository for some examples of the tests described below.
 
 ## What is an ML system?
 
