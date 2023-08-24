@@ -1,5 +1,5 @@
 ---
-title: Welcome to DS with marc
+title: Welcome to DS with Mac
 subtitle: I'm a Data Scientist turned Product Manager, that works with ML / AI powered data products. On this website I will share my thoughs, learnings and inspirations. All opinions here are my own.
 seo_title: DS with Marc | A blog about data products and ML systems
 
