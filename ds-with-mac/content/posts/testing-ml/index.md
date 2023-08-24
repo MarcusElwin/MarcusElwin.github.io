@@ -8,7 +8,7 @@ author: Marcus Elwin
 
 draft: false
 date: 2023-08-20T12:58:11+02:00
-lastmod: 2023-08-23T08:20:11+02:00
+lastmod: 2023-08-24T19:21:11+02:00
 expiryDate: 
 publishDate: 
 
@@ -29,9 +29,9 @@ newsletter: false
 disable_comments: false
 ---
 
-So you have secured data :tada: for your model and trained it with `model.train`, and maybe you have evaluated its performance on a *hold-out* test set or potentially done an `A/B-test`. However, how do you know that your model will work, when deployed? 
+So you have secured data :tada: for your model and trained it with `model.train`, and maybe you have evaluated its performance on a *hold-out* test set or potentially done an `A/B-test`. However, how do you know that your model will work, when deployed? Can you ensure that your model still works after some slight changes in input data? 
 
-Can you ensure that your model still works after some slight changes in input data? In this article we will cover some considerations for how you can test your ML system to mitigate and take any relevant actions before and after you have deployed your model. 
+In this article we will cover some considerations for how you can test your ML system to mitigate and take any relevant actions before and after you have deployed your model. 
 
 This post has been inspired by some previous work such as:
 * :computer: [How to Test Machine Learning Code and Systems](https://eugeneyan.com/writing/testing-ml/)
@@ -57,14 +57,14 @@ Starting with the *input* part of the system, one can see the following componen
 * *Business Requirements*: depending on the company this might be from a *product manager*, *business translator* or other internal *stakeholders* as e.g. marketing.
 * *ML System developers*: different roles such as *ML Engineer*, *AI Engineer*, *Data Scientist*, *Data Engineer* or *Software Developer*.
 
-As popularized by Google in their 2015 paper [Hidden Technical Debt in Machine Learning Systems](https://proceedings.neurips.cc/paper_files/paper/2015/file/86df7dcfd896fcaf2674f757a2463eba-Paper.pdf) the actual ML algorithm is a quite small component of the entire system. You may have heard that data scientists tend to spend >= 20% of their time on actual modelling, and <= 80% of their time on other activities such as cleaning of data (this of course varies between different companies). 
+As popularized by Google in their 2015 paper [Hidden Technical Debt in Machine Learning Systems](https://proceedings.neurips.cc/paper_files/paper/2015/file/86df7dcfd896fcaf2674f757a2463eba-Paper.pdf) the actual ML algorithm is a quite small component of the entire system. You may have heard that data scientists tend to spend >= 20% of their time on actual modelling, and <= 80% of their time on other activities such as cleaning of data. This of course varies between different companies, but I have rarely worked at places where modelling has been 100% of my focus. 
 
-Whilst *infrastructure*, *data*, *feature engineering*, *evaluation* and *deployment* are all **vital** components, especially when going from experimentation all the way to production. This is probably one of the reasons why *ML Engineering* has been so populare in the recent years. In my experience the E2E system design should be thought of already in the earlier stages of developing a ML system to ensure sucess of a ML project. 
+Whilst *infrastructure*, *data*, *feature engineering*, *evaluation* and *deployment* are all **vital** components, especially when going from experimentation all the way to production. This is probably one of the reasons why *ML Engineering* has been so popular in the recent years. In my experience the end-to-end (E2E) system design should be thought of already in the earlier stages of developing a ML system to ensure sucess of a ML powered project or product. 
 
 On another note, here we use the term *ML System* but you might have also heard *data product*:
 
 {{< notice note >}} 
-Some might also call a ML system a **data product**. 
+Some might se a ML system a form of **data product**. There are many other examples but key thing is that *data* is an important component to building the product experience.
 {{< /notice >}}
 
 
@@ -74,17 +74,17 @@ In my experience talking *purely* about the deployed ML model some of these comp
 * Evaluation 
 * ML algorithm 
 
-However, best practice is to test as much as you can.
+However, best practice is to test as much as you can e.g. `test-driven` development or `eval-driven` development.
 
 ## Why test a ML system?
 
-By design ML systems and ML algorithms are `non-deterministic` and depending on the algorithm you choice it might be hard to exactly understand the inner workings (i.e. **white-box** vs **black-box** approaches). An ML system is not better then what data we feed to it i.e. *GIGO* (Garbage in Garbage Out), and data we use tend to be *biased*. 
+By design ML systems and ML algorithms are `non-deterministic` and depending on the algorithm you choice it might be hard to exactly understand the inner workings (i.e. **white-box** vs **black-box** approaches). An ML system is not better then what data we feed to it i.e. *Garbage in Garbage Out* (GIGO), and data we use tend to be *biased* in some way or form. 
 
 Also with the advent of *Large Language Models* (LLMs) which is making the access to and development of ML powered systems accessible to anyone with API calling skills. Testing and making sure that such a system works (on common problem for LLMs is e.g. *hallucinations*), is imperative.
 
 ## Testing a ML system vs testing a traditional software system
 
-The image below shows some key difference between a *traditional* software system (*software 1.0*) and a ML powered system (*software 2.0*):
+The image below shows some key difference between a *traditional* software system (SW), what some mmight call *software 1.0* and a Machine Learning (ML) powered system, what some would call *software 2.0*:
 1) In a traditional SW system *data* together with *logic* is used as input to produce a *desired behaviour*. 
 2) In a ML system *data* together with *desired behaviour* is used to as input to produce some *logic*.
 
@@ -106,7 +106,9 @@ It is not uncommon that a ML system also have additional SW components for e.g. 
 Tests for (2) will be covered in the following sections.
 
 ## Pre-training test(s)
-These type of tests are used as different *sanity* checks to identify bugs early on in the development process of a ML system. As these tests can be ran withouth having a train model, we can use this to *short-circuit* training. Main goal here is to identify **errors** or **bugs** to avoid waisting a training job (cash :moneybag: & time :alarm_clock:). 
+These type of tests are used as different *sanity* checks to identify bugs early on in the development process of a ML system. As these tests can be ran without having a trained model, we can use these tests to *short-circuit* training. Main goal here is to identify **errors** or **bugs** to avoid wasting a training job (i.e. cash :moneybag: & time :alarm_clock:). 
+
+Some tests that could be good to consider:
 
 {{< notice tip >}} 
 1) Check shape of model output 
@@ -189,12 +191,12 @@ def test_no_user_leakage_all_sets_data_split(self):
 {{< / highlight >}}
 
 ## Post-training test(s)
-These type of tests do normally fall into two different groups: *invariance tests* & *directional expectation tests*. It is not uncommon that input data might slightly change over time. One example could be *income distribution* in a country that is changing due to a growing middle class. Other examples are e.g. test data such as transactional descriptions / narratives changes. Also note that for these test to make sense we need an actual *trained* model.
+These type of tests do normally fall into two different groups: *invariance tests* & *directional expectation tests*. It is not uncommon that input data might slightly change over time. One example could be *income distribution* in a country that is changing due to a growing middle class. Other examples are e.g. text data such as transactional descriptions / narratives that are changing with additional or removed keywords. Do also note that for these test to make sense we need an actual *trained* model.
 
 ### Invariance test(s)
-Real-world data might change due to various reason as we eluded to previously. These test aims to test how **stable** and **consistent** the ML model is to **pertubations**. Logic for these types of tests, whilst applied to training a model could also be seen as **data augmentation**.
+Real-world data might change due to various reason as we eluded to previously. These test aims to test how **stable** and **consistent** the ML model is to **pertubations**. The logic around these types of tests, can also be applied to training a model which is a form of **data augmentation**.
 
-Some of these tests that I've been using:
+Some tests to consider:
 
 {{< notice tip >}} 
 1) Assert that model output consistent to small changes in a *feature* of interest.
@@ -217,9 +219,9 @@ Then at time time *t+1* the dataset looks like the below instead:
 | 2023-07-09 | 1700 EUR | AirBnB |
 | 2023-08-10 | 1450 EUR | AirBnB |
 
-:question: Do you notice any changes here in the underlying date? This type of behaviour is something we want to test and make sure that our model learns to handle in order to be considered *stable* and *consistent*. 
+:question: Do you notice any changes here in the underlying data? This type of behaviour is something we want to test and make sure that our model learns to handle in order to be considered *stable* and *consistent*. 
 
-I have used [faker](https://faker.readthedocs.io/en/master/) and [factor_boy](https://factoryboy.readthedocs.io/en/stable/) to generate dummy data to setup these tests in the past:
+[faker](https://faker.readthedocs.io/en/master/) and [factor_boy](https://factoryboy.readthedocs.io/en/stable/) are some good libraries, that I have used to generate dummy data for these type of tests:
 
 {{< highlight python "linenos=inline, style=monokai" >}}
 import factory
@@ -292,16 +294,16 @@ def test_amount_invariance(self):
 Note that we are using the `assertAlmostEqual` here in the test and allow a deviance of `5%` in predictions in this example. If we would not do so, you would see some *flaky* failed builds in your CI/CD pipeline :tools:.
 
 ### Directional Expectations test(s)
-These type of tests allows us to define a set of **pertubations** to the input which should have a predictable effect on the model output. Logic for these types of tests, whilst applied to training a model could also be seen as **data augmentation**.
+Similar to the previous section, these type of tests allows us to define a set of **pertubations** to the input which should have a predictable effect on the model output. Meaning that we would only vary a feature of interest, by keeping everything else the same. Similar to what you would do with e.g. a `partial` depdency plot but applied to testing. The logic around these types of tests, can also be applied to training a model which is a form of **data augmentation**.
 
-Some of these tests that I've been using:
+Some tests to consider:
 
 {{< notice tip >}} 
 1) Assert that model output is *similar* by increasing a certain *feature* of interest, whilst keeping all other features constant.
 2) Assert that model output is *similar* by decreasing a certain *feature* of interest, whilst keeping all other features constant.
 {{< /notice >}}
 
-Note the use of *similar* above, as we cannot guarante that the model output will be 100% equal in these case instead, on needs to operate on allowable threhsolds e.g. **1-3** standard deviation from the mean or +/- **2,5** p.p. as examples. What you should set as good threhsolds depends on your use case and data.
+Note the use of *similar* above, as we cannot guarante that the model output will be 100% equal in these case. Instead, on needs to operate on a range of allowable threhsolds e.g. **1-3** standard deviation from the mean or +/- **2,5** p.p. as examples. What you should set as good threhsolds depends on your use case and data.
 
 We build another `DataTypeFakeFactory` for the directional expectatons test:
 
@@ -351,15 +353,15 @@ Drift for a given input dataset and model output can be due to many various reas
 * Changes or failures in *upstream* dependencies such as data producer used to create a dataset, modified schema, missing data etc.
 * Changes created by the introduction of a ML model, in e.g. targeted marketing with *propensity modelling* you may effect the actions of person to do something they would not normally do (also called *degenerative* feedback loops).
 * Production data is different from what was used during training.
-* Unknown or not handled *edge-cases* or *outliers* such as the recent COVID-19 pandemic, i.e. it is proably not normal for people to hoarding toilet paper.
+* Unknown or not handled *edge-cases* or *outliers* such as the recent COVID-19 pandemic, i.e. it is probably not normal for people to be hoarding toilet paper.
 {{< /notice >}}
 
-Due to the cases above we need ways of identifying when data is *drifting* from a previous state, to take any appropriate actions such as:
-* Re-training a model
-* Adding static rules for edge-cases
-* Collecting more data.
+Due to the cases above we need ways of identifying when data is *drifting* between time periods `t` and `t+1`, to take any appropriate actions such as:
+* Re-training the model or models
+* Adding static rules for handling of edge-cases
+* Collecting more data to make the sample more representative.
 
-Some of these tests that I've been using:
+Some tests to consider:
 
 {{< notice tip >}} 
 1) Test that the distribution of a certain *feature* has not changed *too much* over two time periods.
@@ -404,11 +406,13 @@ def test_mean_drift(self):
     self.assertTrue(True)
 {{< / highlight >}}
 
-You can of course replace *mean* with any other statistical metric such as *median*, *variance* etc. If the drift checks should be alerts in another system or parts of your CI pipeline is up to you, the important take away is that you have a process around it and can get alerted either before deployment or after. Much more can be said about *drift-detection* that might be a topic for another post in the future. 
+In the examples below, you can of course replace *mean* with any other statistical metric such as *median*, *variance* etc. The features don't necessary have to be *numerical* in order for you to do *drift* tests. For `non-numerical` features you need to transform them to a distribution via e.g. `binning` or creating `indicator` features. If the drift checks should be alerts in another system or parts of your CI pipeline is up to you, the important take away is that you have a process around it and can get alerted either before deployment or after. 
+
+Much more can be said about *drift-detection* that might be a topic for another post in the future. 
 
 In the meantime if you are more interested I recommend: 
 * *Chapter 8* of :book: *Designing machine learning systems* by Chip Hueyn that provides a good overview.
 
-Wow great job :muscle:, if you have made it this far after some 10+ minutes. This post turned out to be longer then what I expected. Hopefully you have found something useful in what has worked for me before, plus some insperation for further resources.
+Wow great job :muscle:, if you have made it this far after some 14+ minutes. This post turned out to be longer then what I expected. Hopefully you have found something useful in what has worked for me before, plus some insperation for further resources.
 
 Stay tuned for the coming posts!
