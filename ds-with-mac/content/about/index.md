@@ -13,7 +13,7 @@ I'm a tech and people interested recovering data scientist turned product manage
 
 ## My Experience
 
-I'm a Senior Data Scientist turned Product Manager, living in Stockholm, :flag-se: that have been working with Data Science, Machine Learning and ML Systems for the past 5+ years in a mix of companies and industries ranging from retail to fintech. NLP and LLM are some of my current focus areas as well as learning the ropes of *product management*.
+I'm a Senior Data Scientist turned Product Manager, living in Stockholm, :flag-se: that have been working with Data Science, Machine Learning and ML Systems for the past 5+ years in a mix of companies and industries ranging from *retail* to *fintech*. NLP and LLMs are some of my current focus areas as well as learning the ropes of *product management*.
 
 I also have experience from other types of ML use cases such as: 
 * Demand forecasting, 
