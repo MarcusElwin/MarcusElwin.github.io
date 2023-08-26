@@ -42,7 +42,7 @@ Also check my [GitHub](https://github.com/MarcusElwin/demo-testing-ml) repositor
 ## What is an ML system?
 
 {{< notice note >}} 
-...The algorithm is only a small part of an ML system in production. The system also includes the business requierments...the interface where users and developers interact...the data stack, and the logic for developing, monitoring & updating your models, as well as the infrastructure. 
+...The algorithm is only a small part of an ML system in production. The system also includes the business requirements...the interface where users and developers interact...the data stack, and the logic for developing, monitoring & updating your models, as well as the infrastructure. 
 — <cite>Chip Hueyn[^1]</cite>
 
 [^1]: The above quote is excerpted from Huyen, C. (2022). Designing machine learning systems.
@@ -59,7 +59,7 @@ Starting with the *input* part of the system, one can see the following componen
 
 As popularized by Google in their 2015 paper [Hidden Technical Debt in Machine Learning Systems](https://proceedings.neurips.cc/paper_files/paper/2015/file/86df7dcfd896fcaf2674f757a2463eba-Paper.pdf) the actual ML algorithm is a quite small component of the entire system. You may have heard that data scientists tend to spend >= **20%** of their time on actual modelling, and <= **80%** of their time on other activities such as cleaning of data. This of course varies between different companies, but I have rarely worked at places where modelling has been 100% of my focus. 
 
-Looking inside the "box" of a ML-system *infrastructure*, *data*, *feature engineering*, *evaluation* and *deployment* are all **vital** components, especially when going from experimentation all the way to production. This is probably one of the reasons why *ML Engineering* has been so popular in the recent years. In my experience the end-to-end (E2E) system design should be thought of already in the earlier stages of developing a ML system to ensure sucess of a ML powered project or product. 
+Looking inside the "box" of a ML-system *infrastructure*, *data*, *feature engineering*, *evaluation* and *deployment* are all **vital** components, especially when going from experimentation all the way to production. This is probably one of the reasons why *ML Engineering* has been so popular in the recent years. In my experience the end-to-end (E2E) system design should be thought of already in the earlier stages of developing a ML system to ensure success of a ML powered project or product. 
 
 On another note, here we use the term *ML System* but you might have also heard *data product*:
 
@@ -95,7 +95,7 @@ The relationship between input and output for (1) and (2) are sort of flipped. F
 For a system of type (1) above testing usually boils down to:
 * *Unit-testing*: individual units of source code is tested.
 * *Regression-testing*: tests to make sure the previous fixes to bugs are working.
-* *Integration-testing*: longer tests where the software module is tested E2E with adjecent systems.
+* *Integration-testing*: longer tests where the software module is tested E2E with adjacent systems.
 * *Smoke-testing*: testing if a software is stable or not.
 * *Feature-testing*: functional testing of different features in a software.
 
@@ -118,7 +118,7 @@ Some tests that could be good to consider:
 5) Check for <cite>label leakage[^3]</cite> between your datasets
 
 [^2]: Assertions such as checking for *NULL*, *NaN* values, scaling of your dataset, unique values etc.
-[^3]: *Label Leakage* is when we leak infomation from the training dataset to test or validation sets
+[^3]: *Label Leakage* is when we leak information from the training dataset to test or validation sets
 {{< /notice >}}
 
 What I have been planning to add as test in the future:
@@ -194,7 +194,7 @@ def test_no_user_leakage_all_sets_data_split(self):
 These type of tests do normally fall into two different groups: *invariance tests* & *directional expectation tests*. It is not uncommon that input data might slightly change over time. One example could be *income distribution* in a country that is changing due to a growing middle class. Other examples are e.g. text data such as transactional descriptions / narratives that are changing with additional or removed keywords. Do also note that for these test to make sense we need an actual *trained* model.
 
 ### Invariance test(s)
-Real-world data might change due to various reason as we eluded to previously. These test aims to test how **stable** and **consistent** the ML model is to **pertubations**. The logic around these types of tests, can also be applied to training a model which is a form of **data augmentation**.
+Real-world data might change due to various reason as we eluded to previously. These test aims to test how **stable** and **consistent** the ML model is to **perturbations**. The logic around these types of tests, can also be applied to training a model which is a form of **data augmentation**.
 
 Some tests that could be good to consider:
 
@@ -221,7 +221,7 @@ Then at time time *t+1* the dataset looks like the below instead:
 
 :question: Do you notice any changes here in the underlying data? This type of behaviour is something we want to test and make sure that our model learns to handle in order to be considered *stable* and *consistent*. 
 
-Should you test with real data or dummy data? Short anwser is that it depends. I have found that [faker](https://faker.readthedocs.io/en/master/) and [factor_boy](https://factoryboy.readthedocs.io/en/stable/) are some good libraries to generate dummy data for these type of tests:
+Should you test with real data or dummy data? Short answer is that it depends. I have found that [faker](https://faker.readthedocs.io/en/master/) and [factor_boy](https://factoryboy.readthedocs.io/en/stable/) are some good libraries to generate dummy data for these type of tests:
 
 {{< highlight python "linenos=inline, style=monokai" >}}
 import factory
@@ -294,7 +294,7 @@ def test_amount_invariance(self):
 Note that we are using the `assertAlmostEqual` here in the test and allow a deviance of `5%` in predictions in this example. If we would not do so, you would see some *flaky* failed builds in your CI/CD pipeline :tools:.
 
 ### Directional Expectations test(s)
-Similar to the previous section, these type of tests allows us to define a set of **pertubations** to the model input which should have a predictable effect on the model output. Meaning that we would only vary a feature of interest, by keeping everything else the same. Similar to what you would do with e.g. a `partial` depdency plot but applied to testing. The logic around these types of tests, can also be applied to training a model which is a form of **data augmentation**.
+Similar to the previous section, these type of tests allows us to define a set of **perturbations** to the model input which should have a predictable effect on the model output. Meaning that we would only vary a feature of interest, by keeping everything else the same. Similar to what you would do with e.g. a `partial` dependency plot but applied to testing. The logic around these types of tests, can also be applied to training a model which is a form of **data augmentation**.
 
 Some tests that could be good to consider:
 
@@ -303,9 +303,9 @@ Some tests that could be good to consider:
 2) Assert that model output is *similar* by decreasing a certain *feature* of interest, whilst keeping all other features constant.
 {{< /notice >}}
 
-Note the use of *similar* above, as we cannot guarante that the model output will be 100% equal in these case. Instead, one needs to operate on a range of allowable *threhsolds* e.g. **1-3** standard deviation from the mean or +/- **2,5** p.p. as examples. What you should set as good threhsolds depends on your use case and data.
+Note the use of *similar* above, as we cannot guarantee that the model output will be 100% equal in these case. Instead, one needs to operate on a range of allowable *threhsolds* e.g. **1-3** standard deviation from the mean or +/- **2,5** p.p. as examples. What you should set as good threhsolds depends on your use case and data.
 
-We build another `DataTypeFakeFactory` for the directional expectatons test:
+We build another `DataTypeFakeFactory` for the directional expectations test:
 
 {{< highlight python "linenos=inline, style=monokai" >}}
 class IncreasingAmountFakeFactory(DataTypeFakeFactory):
@@ -406,13 +406,13 @@ def test_mean_drift(self):
     self.assertTrue(True)
 {{< / highlight >}}
 
-In the examples below, you can of course replace *mean* with any other statistical metric such as *median*, *variance* etc. The features don't necessary have to be *numerical* in order for you to do *drift* tests. For `non-numerical` features you need to transform them to a distribution via e.g. `binning` or creating `indicator` features. If the drift checks should be alerts in another system or parts of your CI pipeline is up to you, the important take away is that you have a process around it will be alerted either before or after deployment. Prefarably both. 
+In the examples below, you can of course replace *mean* with any other statistical metric such as *median*, *variance* etc. The features don't necessary have to be *numerical* in order for you to do *drift* tests. For `non-numerical` features you need to transform them to a distribution via e.g. `binning` or creating `indicator` features. If the drift checks should be alerts in another system or parts of your CI pipeline is up to you, the important take away is that you have a process around it will be alerted either before or after deployment. Preferably both. 
 
 Much more can be said about *drift-detection* that might be a topic for another post in the future. 
 
 In the meantime if you are more interested I recommend: 
 * *Chapter 8* of :book: *Designing machine learning systems* by Chip Hueyn that provides a good overview.
 
-Wow great job :muscle:, if you have made it this far after some 14+ minutes. This post turned out to be longer then what I expected. Hopefully you have found something useful in what has worked for me before, plus some insperation for further resources.
+Wow great job :muscle:, if you have made it this far after some 14+ minutes. This post turned out to be longer then what I expected. Hopefully you have found something useful in what has worked for me before, plus some inspiration for further resources.
 
 Stay tuned for the coming posts!
