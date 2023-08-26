@@ -64,7 +64,7 @@ Looking inside the "box" of a ML-system *infrastructure*, *data*, *feature engin
 On another note, here we use the term *ML System* but you might have also heard *data product*:
 
 {{< notice note >}} 
-Some might see a ML system a form of **data product**. There are many other examples (*data source*, *a table*, *dashboard*, etc) but key thing here, is *data* which is an important component to building the *product experience*.
+Some might see a ML system as a form of **data product**. There are many other examples (*data source*, *a table*, *dashboard*, etc) but key thing here, is *data* which is an important component to building the *product experience*.
 {{< /notice >}}
 
 
