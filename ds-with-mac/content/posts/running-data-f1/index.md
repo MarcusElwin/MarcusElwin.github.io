@@ -1,7 +1,7 @@
 ---
 title: Running your Data Products Team as a F1 team
 seo_title: Running Data your Data Products Team as a F1 team
-summary: In formula 1 and for data product teams, the sum is not greater than than is parts.
+summary: In formula 1 and for data product teams, the sum is not greater than its parts.
 description: 
 slug: running-data-f1
 author: Marcus Elwin
@@ -27,6 +27,7 @@ related: true
 social_share: true
 newsletter: false
 disable_comments: false
+
 ---
 [FIA Formula 1](https://www.formula1.com/) is the ultimate combination of <cite>fast cars [^1]</cite>, the latest techology and eccentric drivers and team principals. Not to far off from the "normal" business environment :sweat_smile: at a tech startup or scale-up. Me like many other people where probably not big F1 fans until we saw [Formula 1 Drive To Survie](https://www.netflix.com/se-en/title/80204890) on Netflix a couple of years back. 
 
@@ -50,11 +51,11 @@ In this blog post we will dig in to the inner workings of a F1 team, data produc
 | Production | __TODO__ | 8-90|
 | Other | __TODO__ | 20-90|
 
-The table above shows a rough grouping of different **9** common roles in a Formula 1 team. Depending on the size of the team normally ~170-600 people are involved in operating a Formula 1 team. Below follows an overview of what each person is in charge of:
+The table above shows a rough grouping of different **9** common roles in a Formula 1 team. Depending on the size of the team normally ~**170-600** people are involved in operating a Formula 1 team. Below follows an overview of what each person is in charge of:
 
-* *Team Principal*: The directors of the team, some may come from car manufactors or other are from private companies from the team owners.
+* *Team Principal*: The directors of the team, some may come from car manufactors or other are from private companies from e.g. the team owners.
 
-* *F1 Drivers*: The stars of the team driving the F1 cars. Normally there is 1 reserve driver and 1 simulation driver.
+* *F1 Drivers*: The stars of the team driving the F1 cars. Normally there is 2 main drivers,  1 reserve driver and 1 simulation driver. The two main drivers tend to be bitter foes.
 
 * *Assistants*: They are in charge of helping and organzing events, calendars and procedures.
 
@@ -75,12 +76,65 @@ More and more teams also employs data competencies such as *Data Scientist*, *Da
 {{< /notice >}}
 
 ### Activities during a "normal" race week
-__TODO__
+
+{{<mermaid>}}
+timeline
+    title Formula 1 "Typical" Race Week
+    Day 1 - 4
+        : Travel
+        : Logistics
+        : Setup
+        : Teardown plan
+    Day 5 
+        : Practice 1
+        : Practice 2
+    Day 6
+        : Practice 3
+        : Pre-Qualifying Show
+        : Qualifying
+        : Post Qualifying Show
+    Day 7 
+        : Race 
+        : Post-Race Show
+        : Pack-up
+        : Race debrief
+{{</mermaid>}}
+
+The timeline above illustrates how a "regular" race week looks like for a Formula 1 team.
+
+#### Day 1-4 Race preparations
+During the 4 days before the race weekend the teams normally:
+* Travel from the previous race location to the next
+* Transport and ship cars, pits, motorhomes and garages
+* Setup these on the new race location
+* Use Thursday morning to setup their teardown plan for Sunday.
+
+#### Day 5 Race Practice
+On Friday's race practice starts where team:
+* Collect live-data during 2 practice sessions, to adapt computer simulations and improve race strategies
+* Testing new parts that have been proven in e.g. wind tunnels or simulations
+* Drivers learning the track and together with data and feedback from drivers engineers adjust the cars in terms of balance and drivability
+* Degradation analysis of different [tyre compounds](https://www.formula1.com/en/latest/article.the-beginners-guide-to-formula-1-tyres.61SvF0Kfg29UR2SPhakDqd.html) is also performed.
+
+#### Day 6 Race Qualifying
+During Saturdays the following events take place:
+* Final practice if it is not [sprint-week](https://www.formula1.com/en/latest/article.explained-everything-you-need-to-know-about-the-2023-f1-sprint-format.583WHWKbWVVBemPKi6pJxH.html), where the team makes final adjustment and decides on their *qualifying strategy.*
+* During qualifying session the teams compete for starting positions on the grid for race day, during qualifying the cars enters *parc ferme* until the start of the race, meaning that the team have limited ability to do changes to the car. 
+* After qualifying session, strategy team have much more *accurate* data to run simulations on for race day. 
+* There are also pre & post-shows during this day.
+
+#### Day 7 Race & Pack-up
+Finally Sunday arrives which is race day:
+* Teams are allowed to touch their cars for up to 5 hours before the formation lap of the race
+* Formation lap starts, and drivers often try to get there tyres up to temperature
+* Race starts and all teams try to win as many points as possible
+* Before the race is finished the teams beginning the *pack-up* according to the plan from Thursday
+* Immediately after race each team has a *debrief* session to spot any issues for the next race
 
 ## How is a Data Products Team (DPT) organized?
-__TODO__
 
 ### Typical roles in a Data Products Team
+
 | Role   | Role Description     | # People   |
 | --------  | -------- | ------ |
 | Area Leads / Engineering Directors | __TODO__ | 1 - 4 |
@@ -93,20 +147,34 @@ __TODO__
 
 * *Area Leads / Engineering Directors*: The directors of the team setting the high level vision and agenda based on the company objectives. Depending on company CTO might take some of these roles as well or VP of Engineering.
 
-* *Engineering Managers*: Responsible for coaching, mentoring and developing the team and improving the execution of things. Often fascinated with reducing **"technical debt"**. Some more Data Science focused companies might have a variant called *Data Science Manager*.
+* *Engineering Managers*: Responsible for coaching, mentoring and developing the team and improving the *execution* of things. Often fascinated with reducing **"technical debt"**. Some more Data Science focused companies might have a variant called *Data Science Manager*.
 
 * *Product Managers*: Responsible for the vision and roadmap for what to build in the team. Often teams gateway to clients. They are in the sweat spoot of having no *formal power*, but need to get people and other teams aligned and do what they want.
 
 * *Data Scientists*: Data wizards, Data Wranglers that make magic happen with data. *ML*, *LLMs* & *AI* are buzzwords they use. Often in charge of building algorithms and or product logic, but not always deploying (many favor *jupyter notebooks*) them depending on the company. Also some companies might call them *AI Engineers*, *ML Engineer* or even *Generative AI Engineer* these days. You might also have seen [Decision Scientist](https://chds.hsph.harvard.edu/approaches/what-is-decision-science/) pop up in some companies. What they do differently from Data Scientist is still an unsolved mystery.
 
-* *Backend / Frontend Engineers*: Engineers skilled in building backend or frontend systems, APIs, infrastructure via terraform and reducing **technical debt** (which is why they get along with the EM). If you are fortunate you may have some *full-stack* engineers in your team that can do both. Not like wizards, bit more like swizz knifes.
+* *Backend / Frontend Engineers*: Engineers skilled in building backend or frontend systems, APIs, infrastructure via terraform and reducing **technical debt** (which is why they get along with the EM). If you are fortunate you may have some *full-stack* engineers in your team that can do both. Not like wizards, bit more like swizz knives.
 
 * *Designers*: People skilled in figma and designing flows and user journeys. Often these tend to be outside of the product team, so if you have one don't let them leave.
 
-* *Other*: Usually people labelling data, most often students needing money :moneybag:.
+* *Other*: Usually people labelling data, most often students needing money :moneybag:. Some companies also employ data annotation firms, with [questionable](https://www.context.news/ai/ai-boom-is-dream-and-nightmare-for-workers-in-global-south) practices.
 
 ### Activities during a "normal" business week
-__TODO__
+
+{{<mermaid>}}
+timeline
+    title Data Product Team "Typical" Week
+    Day 1
+        : TBA
+    Day 2
+        : TBA
+    Day 3
+        : TBA
+    Day 4
+        : TBA
+    Day 5 
+        : TBA 
+{{</mermaid>}}
 
 ### Data Products?
 __TODO__
