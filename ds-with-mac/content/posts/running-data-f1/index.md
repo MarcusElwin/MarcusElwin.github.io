@@ -12,7 +12,7 @@ lastmod:
 expiryDate: 
 publishDate: 
 
-feature_image: 
+feature_image:
 feature_image_alt: 
 
 categories:
@@ -133,6 +133,13 @@ Finally Sunday arrives which is race day:
 
 ## How is a Data Products Team (DPT) organized?
 
+### Digression Data Products?
+To understand what a *data products* team is doing, it might be helpful to discuss what a *data product* is. We will not detail to any larger extent what a data product is in this article, but perhaps in future articles. However, as any sane person would do I did ask for help from *chatGPT*:
+
+{{< notice note >}} 
+A data product is essentially a product that derives its value primarily from data. Unlike traditional products or even most software products, data products are all about using data to provide insights, solve problems, or make predictions. They're like the intersection of technology and data science. So, in simple terms, a data product is something like your weather app that uses data to provide you with valuable information or services, and it's different from regular, physical products or services because it relies on data to function and deliver value.
+{{< /notice >}}
+
 ### Typical roles in a Data Products Team
 
 | Role   | Role Description     | # People   |
@@ -165,25 +172,80 @@ Finally Sunday arrives which is race day:
 timeline
     title Data Product Team "Typical" Week
     Day 1
-        : TBA
+        : Weekly team meeting
+        : Feature Work
     Day 2
-        : TBA
+        : Standup/Checkin
+        : Feature Work
     Day 3
-        : TBA
+        : Standup/Checkin
+        : Feature Work
     Day 4
-        : TBA
+        : Standup/Checkin
+        : Team Retro
+        : Feature Work
     Day 5 
-        : TBA 
+        : Standup/Checkin 
+        : Demos
+        : Grooming / Planning
 {{</mermaid>}}
 
-### Data Products?
-__TODO__
+The timeline above illustrates a "regular" week a typical "product" using some agile framework such as *kanban* or *scrum* team, working in weekly sprints in my experience. 
+
+#### Day 1 Weekly preparations
+Depending on what team you work in Mondays are usually used for:
+* Weekly team meeting to sync on any spillover from last week, focus for team this week, and potentially startup of any new initatives. Some companies might use [DRIs](https://about.gitlab.com/handbook/people-group/directly-responsible-individuals/) to lead an inititive, often an engineer in the team. Whilst at other companies this responsibility might be more on the PM and or EM.
+* Feature work is typically picked up again.
+
+#### Day 2-4 Feature Work
+During these days most of the focus is mainly on feature work:
+* Feature work in 1 or more initatives, where data product teams tend to be cross-functional
+* Daily standups or checkins to check progress and any blockers on deliveries
+* Team retros to evaluate way of working or other topics that can be weekly or bi-weekly. Also good time for team to evaluate and complain.
+
+#### Day 5 Demos & planning
+Finally race day :car:...or demo day:
+* Wrap of of feature work before end of week, brave souls merge to production on Fridays others relax :beer:
+* Usually some demo session is hold, internal in the team or across the company
+* Grooming and planning for next week is also typically done.
 
 ## What are some similarities between F1 and DPT?
-__TODO__
+So now that we know how a Formula 1 team and Data Product Team works, let's look at some simularities:
+
+| **Similarities**                            | **Formula 1 Team**                                        | **Data Product Team**                                       |
+|--------------------------------------------|-----------------------------------------------------------|--------------------------------------------------------------|
+| 1. **Team Collaboration**                  | Diverse specialists collaborating effectively.            | Cross-functional teams working in harmony.                   |
+| 2. **Data-Driven Decision-Making**         | Heavy reliance on data for optimization and strategy.    | Data informs product development and decision-making.        |
+| 3. **Iterative Development**               | Constantly evolving car designs throughout the season.   | Regular product updates and enhancements based on feedback.  |
+| 4. **Performance Optimization**            | Focus on maximizing car performance on the track.        | Optimization for efficient, scalable, and user-friendly products.|
+| 5. **Risk Management**                    | Managing and mitigating race-day risks.                  | Robust risk management for data security and reliability.    |
+| 6. **Real-Time Decision-Making**          | Swift, real-time decisions during races.                 | Agile adaptation to changing user needs and market conditions.|
+| 7. **Continuous Learning**                | Learning and adjusting strategies from race to race.     | Continual improvement based on user feedback and data analysis.|
+| 8. **Technology Integration**             | Embracing cutting-edge automotive innovations.           | Leveraging advanced technologies like ML and AI.            |
+| 9. **Competitive Landscape**              | Competition against rival teams.                         | Competing in crowded markets, differentiating products.     |
+| 10. **User Experience**                   | Prioritizing the driver's experience in the car.         | User-centered design for intuitive and engaging products.   |
+| 11. **Strategic Planning**                | Developing race strategies aligned with goals.           | Creating product roadmaps aligned with business objectives. |
+| 12. **Resource Management**               | Efficient management of budgets and personnel.           | Allocating resources effectively for product development.  |
+
 
 ## Learnings from F1 that can be applied to DPT?
-__TODO__
+Below follows a table with some key-learnings a Data Product Team can draw from Formula 1:
+
+| **Learnings for Data Product Teams**                        | **Derived from Formula 1 Teams**                     |
+|------------------------------------------------------------|------------------------------------------------------|
+| 1. **Continuous Improvement**                               | Embrace incremental improvements and feedback loops. |
+| 2. **Data-Driven Decision-Making**                          | Prioritize data analytics for informed decisions.    |
+| 3. **Cross-Functional Collaboration**                       | Leverage diverse skills within the team effectively. |
+| 4. **Iterative Development**                                | Follow iterative development cycles for agility.     |
+| 5. **Performance Optimization**                             | Optimize product performance and efficiency.         |
+| 6. **Risk Management**                                     | Develop robust risk management strategies.           |
+| 7. **Real-Time Adaptation**                                | Be agile and adaptable to changing circumstances.    |
+| 8. **User-Centered Design**                                | Focus on creating products that solve user problems. |
+| 9. **Strategic Planning**                                  | Develop clear product roadmaps aligned with goals.   |
+| 10. **Resource Efficiency**                                | Allocate resources efficiently for product success.  |
+| 11. **Competitive Positioning**                            | Continuously assess the competitive landscape.       |
+| 12. **Focus on Performance and Value Delivery**             | Prioritize delivering high-performance products.     |
+
 
 
 [^1]: Depending on track and circuit the drivers can reach up to 345km/h or 214mph, see more [here](https://www.autosport.com/f1/news/how-fast-is-an-f1-car-top-speeds-of-f1-indycar-motogp-and-more-4980734/4980734/)
