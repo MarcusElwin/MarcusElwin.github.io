@@ -29,47 +29,56 @@ newsletter: false
 disable_comments: false
 
 ---
-[FIA Formula 1](https://www.formula1.com/) is the ultimate combination of <cite>fast cars [^1]</cite>, the latest techology and eccentric drivers and team principals. Not to far off from the "normal" business environment :sweat_smile: at a tech startup or scale-up. Me like many other people where probably not big F1 fans until we saw [Formula 1 Drive To Survie](https://www.netflix.com/se-en/title/80204890) on Netflix a couple of years back. 
 
-As of now in the middle of the 2023 session, there are [10](https://www.formula1.com/en/teams.html) Formula 1 teams competing with *Redbull Racing* leading the *constructors* championship followed by *Mercedes* and *Aston Martion* on second and third position. Red-bull is clearly enjoying the :crown: with their super star [Max Verstapen](https://sv.wikipedia.org/wiki/Max_Verstappen). But is all credit due to him, for their great success in the 2023 session?
+**Formula 1: Where Speed Meets Tech and Charisma** :racing_car:
 
-In this blog post we will dig in to the inner workings of a F1 team, data products team and what similarities there are, to finally conclude on some learnings data product teams can take from F1.
+[FIA Formula 1](https://www.formula1.com/) is an electrifying blend of fast cars, cutting-edge tech, and charismatic personalities. It's not unlike the dynamic atmosphere of a tech startup or scale-up.
+
+Many, myself included, became avid F1 fans after watching ['Formula 1: Drive to Survive'](https://www.netflix.com/se-en/title/80204890) on Netflix.
+
+In the midst of the 2023 season, [10](https://www.formula1.com/en/teams.html) teams compete, with *Redbull Racing* leading the *constructors* championship :crown:. They owe much of their success to superstar [Max Verstappen](https://sv.wikipedia.org/wiki/Max_Verstappen), but is it all due to him?
+
+In this blog, we delve into F1 and data product teams, uncovering intriguing parallels. Our goal: extract valuable insights for data product teams from the high-speed world of Formula 1.
+
+Get ready for a thrilling ride!
+
 
 ## How is a F1 team organized?  
 
 ### Typical roles in a F1 team
 
-| Role   | Role Description     | # People   |
-| --------  | -------- | ------ |
-| Team Principal | __TODO__ | 1 |
-| F1 Drivers | __TODO__ | 2 |
-| Assistants | __TODO__ | 4-12 |
-| Managers | __TODO__ | 10-20 |
-| Engineers | __TODO__ | 51-211+|
-| Designers | __TODO__ | 44-120|
-| Mechanics | __TODO__ | 20+|
-| Production | __TODO__ | 8-90|
-| Other | __TODO__ | 20-90|
+| Role           | Role Description                           | # People |
+| -------------- | ------------------------------------------ | -------- |
+| Team Principal | The team's top decision-maker and leader.  | 1        |
+| F1 Drivers     | Elite drivers who race for the team.       | 2        |
+| Assistants     | Support staff for various team functions.  | 4-12     |
+| Managers       | Oversee team operations and strategies.    | 10-20    |
+| Engineers      | Design and optimize the race car.          | 51-211+  |
+| Designers      | Create car designs and aerodynamics.       | 44-120   |
+| Mechanics      | Maintain and service the race car.         | 20+      |
+| Production     | Produce car components and equipment.      | 8-90     |
+| Other          | Diverse roles such as PR, marketing, etc.  | 20-90    |
+
 
 The table above shows a rough grouping of different **9** common roles in a Formula 1 team. Depending on the size of the team normally ~**170-600** people are involved in operating a Formula 1 team. Below follows an overview of what each person is in charge of:
 
-* *Team Principal*: The directors of the team, some may come from car manufactors or other are from private companies from e.g. the team owners.
+* **Team Principal**: The directors of the team, some may come from car manufactors or other are from private companies from e.g. the team owners.
 
-* *F1 Drivers*: The stars of the team driving the F1 cars. Normally there is 2 main drivers,  1 reserve driver and 1 simulation driver. The two main drivers tend to be bitter foes.
+* **F1 Drivers**: The stars of the team driving the F1 cars. Normally there is 2 main drivers,  1 reserve driver and 1 simulation driver. The two main drivers tend to be bitter foes.
 
-* *Assistants*: They are in charge of helping and organzing events, calendars and procedures.
+* **Assistants**: They are in charge of helping and organzing events, calendars and procedures.
 
-* *Managers*: In charge of different groups and areas, leading teams, supervising and guiding.
+* **Managers**: In charge of different groups and areas, leading teams, supervising and guiding.
 
-* *Engineers*: Many different rules such as *race engineers*, *aerodynamics engineers* and *R&D engineers*. They make shit work. 
+* **Engineers**: Many different rules such as *race engineers*, *aerodynamics engineers* and *R&D engineers*. They make shit work. 
 
-* *Designers*: Handle everything covering the design of the cars.
+* **Designers**: Handle everything covering the design of the cars.
 
-* *Mechanics*: What we normally see during the races, they change and repair components when the F1 drivers fucks up.
+* **Mechanics**: What we normally see during the races, they change and repair components when the F1 drivers fucks up.
 
-* *Production*: Responsible for producing and developing car parts.
+* **Production**: Responsible for producing and developing car parts.
 
-* *Other*: Chefs, personal trainers,  web and media relations etc.
+* **Other**: Chefs, personal trainers,  web and media relations etc.
 
 {{< notice note >}} 
 More and more teams also employs data competencies such as *Data Scientist*, *Data Engineers*, *Analytics Engineers* to make the teams more successful in wind tunnel similations for aerodynamics, making sense of waste amounts of IoT data and even improving the team strategies.
@@ -102,34 +111,37 @@ timeline
 
 The timeline above illustrates how a "regular" race week looks like for a Formula 1 team.
 
-#### Day 1-4 Race preparations
-During the 4 days before the race weekend the teams normally:
-* Travel from the previous race location to the next
-* Transport and ship cars, pits, motorhomes and garages
-* Setup these on the new race location
-* Use Thursday morning to setup their teardown plan for Sunday.
+#### Day 1-4: Race Preparation
+In the four days leading up to the race weekend, teams embark on a whirlwind of activity:
 
-#### Day 5 Race Practice
-On Friday's race practice starts where team:
-* Collect live-data during 2 practice sessions, to adapt computer simulations and improve race strategies
-* Testing new parts that have been proven in e.g. wind tunnels or simulations
-* Drivers learning the track and together with data and feedback from drivers engineers adjust the cars in terms of balance and drivability
-* Degradation analysis of different [tyre compounds](https://www.formula1.com/en/latest/article.the-beginners-guide-to-formula-1-tyres.61SvF0Kfg29UR2SPhakDqd.html) is also performed.
+- They traverse from the previous race location to the new one.
+- Cars, pits, motorhomes, and garages are transported and set up.
+- The Thursday morning is reserved for strategizing the teardown plan for Sunday.
 
-#### Day 6 Race Qualifying
-During Saturdays the following events take place:
-* Final practice if it is not [sprint-week](https://www.formula1.com/en/latest/article.explained-everything-you-need-to-know-about-the-2023-f1-sprint-format.583WHWKbWVVBemPKi6pJxH.html), where the team makes final adjustment and decides on their *qualifying strategy.*
-* During qualifying session the teams compete for starting positions on the grid for race day, during qualifying the cars enters *parc ferme* until the start of the race, meaning that the team have limited ability to do changes to the car. 
-* After qualifying session, strategy team have much more *accurate* data to run simulations on for race day. 
-* There are also pre & post-shows during this day.
+#### Day 5: Race Practice
+Friday kicks off with race practice, where teams dive into action:
 
-#### Day 7 Race & Pack-up
-Finally Sunday arrives which is race day:
-* Teams are allowed to touch their cars for up to 5 hours before the formation lap of the race
-* Formation lap starts, and drivers often try to get there tyres up to temperature
-* Race starts and all teams try to win as many points as possible
-* Before the race is finished the teams beginning the *pack-up* according to the plan from Thursday
-* Immediately after race each team has a *debrief* session to spot any issues for the next race
+- Two practice sessions collect live data, fine-tuning computer simulations and race strategies.
+- Teams test new parts, previously validated in wind tunnels or simulations.
+- Drivers acquaint themselves with the track, while engineers adjust cars based on data and driver feedback.
+- In-depth analysis of tire compounds degradation is also on the agenda.
+
+#### Day 6: Race Qualifying
+Saturdays are packed with events:
+
+- If it's not a sprint weekend, there's a final practice session for last-minute adjustments and qualifying strategy decisions.
+- During qualifying, teams battle for grid positions, and cars enter parc fermé, limiting adjustments until race day.
+- Post-qualifying, the strategy team has precise data for simulations.
+- Pre and post-shows provide extra excitement.
+
+#### Day 7: Race & Pack-Up
+Finally, Sunday arrives, the big race day :racing_car::
+
+- Teams have a brief window (5 hours) to work on their cars before the formation lap.
+- The formation lap warms up tires and prepares drivers.
+- The race begins, and teams compete for valuable points.
+- As the race unfolds, teams start the pack-up, following the Thursday plan.
+- Post-race, each team holds a debrief session to iron out issues for the next race.
 
 ## How is a Data Products Team (DPT) organized?
 
@@ -142,29 +154,29 @@ A data product is essentially a product that derives its value primarily from da
 
 ### Typical roles in a Data Products Team
 
-| Role   | Role Description     | # People   |
-| --------  | -------- | ------ |
-| Area Leads / Engineering Directors | __TODO__ | 1 - 4 |
-| Engineering Managers | __TODO__ | 1-2 |
-| Product Managers | __TODO__ | 1-3 |
-| Data Scientists | __TODO__ | 3-5 |
-| Backend / Frontend Engineers | __TODO__ | 5-10|
-| Designers | __TODO__ | 1-2|
-| Other | __TODO__ | 5-10|
+| Role                               | Role Description                                      | # People |
+| ---------------------------------- | ----------------------------------------------------- | -------- |
+| Area Leads / Engineering Directors | Oversee and guide technical domains and strategies.   | 1 - 4    |
+| Engineering Managers               | Manage and support engineering teams effectively.     | 1-2      |
+| Product Managers                   | Define product vision and guide development efforts.  | 1-3      |
+| Data Scientists                    | Utilize data for insights and machine learning.       | 3-5      |
+| Backend / Frontend Engineers       | Develop backend and frontend components of the product. | 5-10    |
+| Designers                          | Create user-centric design for product interfaces.    | 1-2      |
+| Other                              | Diverse roles such as QA, DevOps, etc.                | 5-10     |
 
-* *Area Leads / Engineering Directors*: The directors of the team setting the high level vision and agenda based on the company objectives. Depending on company CTO might take some of these roles as well or VP of Engineering.
+* **Area Leads / Engineering Directors**: These folks are the true visionaries of the team, setting the high-level agenda based on the company's grand objectives. Depending on the company's mood, they might share the limelight with the CTO or VP of Engineering.
 
-* *Engineering Managers*: Responsible for coaching, mentoring and developing the team and improving the *execution* of things. Often fascinated with reducing **"technical debt"**. Some more Data Science focused companies might have a variant called *Data Science Manager*.
+* **Engineering Managers**: Ah, the coaches, the mentors, the team's cheerleaders, if you will. They're all about optimizing the execution of things and have a bizarre fascination with reducing the infamous "technical debt." Some ultra-hip Data Science-focused companies might even sport a peculiar variant known as the "Data Science Manager."
 
-* *Product Managers*: Responsible for the vision and roadmap for what to build in the team. Often teams gateway to clients. They are in the sweat spoot of having no *formal power*, but need to get people and other teams aligned and do what they want.
+* **Product Managers**: The gatekeepers of vision and roadmap. They hold no formal power but are expected to herd cats (read: teams and people) to get things done. Getting folks aligned and doing what they want? Just another day in the sweat spot.
 
-* *Data Scientists*: Data wizards, Data Wranglers that make magic happen with data. *ML*, *LLMs* & *AI* are buzzwords they use. Often in charge of building algorithms and or product logic, but not always deploying (many favor *jupyter notebooks*) them depending on the company. Also some companies might call them *AI Engineers*, *ML Engineer* or even *Generative AI Engineer* these days. You might also have seen [Decision Scientist](https://chds.hsph.harvard.edu/approaches/what-is-decision-science/) pop up in some companies. What they do differently from Data Scientist is still an unsolved mystery.
+* **Data Scientists**: The wizards, the data wranglers, the folks who make magic happen with data. They casually throw around terms like ML, LLMs, and AI, but deploying? Well, that's not always their cup of tea. Many of them prefer cozying up to Jupyter notebooks. Some companies even call them "AI Engineers," "ML Engineers," or the trendy "Generative AI Engineers." And hey, have you heard of the mystical "[Decision Scientist](https://chds.hsph.harvard.edu/approaches/what-is-decision-science/)"? No one's quite sure what makes them different from regular Data Scientists, but it's a mystery we're not solving today.
 
-* *Backend / Frontend Engineers*: Engineers skilled in building backend or frontend systems, APIs, infrastructure via terraform and reducing **technical debt** (which is why they get along with the EM). If you are fortunate you may have some *full-stack* engineers in your team that can do both. Not like wizards, bit more like swizz knives.
+* **Backend / Frontend Engineers**: These are the swiss knives of engineering, skilled in crafting backend or frontend systems, APIs, and sculpting infrastructure with terraform. Oh, and they're best buds with the Engineering Managers because they share a common love for reducing "technical debt." If you're lucky, you might spot a rare species known as "full-stack" engineers. They're not exactly wizards, but they're more like those handy Swiss Army knives.
 
-* *Designers*: People skilled in figma and designing flows and user journeys. Often these tend to be outside of the product team, so if you have one don't let them leave.
+* **Designers**: The true artists of the digital realm, they're all about Figma and crafting user journeys. Sometimes, they're the mysterious outsiders, dwelling beyond the borders of the product team. Whatever you do, don't let them leave – you'd be lost without them.
 
-* *Other*: Usually people labelling data, most often students needing money :moneybag:. Some companies also employ data annotation firms, with [questionable](https://www.context.news/ai/ai-boom-is-dream-and-nightmare-for-workers-in-global-south) practices.
+* **Other**: These are the unsung heroes, often students in desperate need of cash :moneybag:. Some companies go all out and hire data annotation firms, known for their *interesting* practices. [Read more](https://www.context.news/ai/ai-boom-is-dream-and-nightmare-for-workers-in-global-south) about their adventures if you dare.
 
 ### Activities during a "normal" business week
 
@@ -192,22 +204,26 @@ timeline
 
 The timeline above illustrates a "regular" week a typical "product" using some agile framework such as *kanban* or *scrum* team, working in weekly sprints in my experience. 
 
-#### Day 1 Weekly preparations
-Depending on what team you work in Mondays are usually used for:
-* Weekly team meeting to sync on any spillover from last week, focus for team this week, and potentially startup of any new initatives. Some companies might use [DRIs](https://about.gitlab.com/handbook/people-group/directly-responsible-individuals/) to lead an inititive, often an engineer in the team. Whilst at other companies this responsibility might be more on the PM and or EM.
-* Feature work is typically picked up again.
+#### Day 1: Weekly Preparations
+Mondays kick off the week with various activities based on your team's focus:
 
-#### Day 2-4 Feature Work
-During these days most of the focus is mainly on feature work:
-* Feature work in 1 or more initatives, where data product teams tend to be cross-functional
-* Daily standups or checkins to check progress and any blockers on deliveries
-* Team retros to evaluate way of working or other topics that can be weekly or bi-weekly. Also good time for team to evaluate and complain.
+- Teams often hold a weekly meeting to review last week's progress, set this week's priorities, and potentially launch new initiatives. Some companies rely on Directly Responsible Individuals ([DRIs](https://about.gitlab.com/handbook/people-group/directly-responsible-individuals/)) to lead initiatives, while others may delegate this responsibility to Product Managers or Engineering Managers.
+- Feature work resumes, gaining momentum.
 
-#### Day 5 Demos & planning
-Finally race day :car:...or demo day:
-* Wrap of of feature work before end of week, brave souls merge to production on Fridays others relax :beer:
-* Usually some demo session is hold, internal in the team or across the company
-* Grooming and planning for next week is also typically done.
+#### Day 2-4: Feature Work
+Midweek, the focus sharpens on feature development:
+
+- Teams dive into feature work as part of one or more initiatives, leveraging cross-functional collaboration.
+- Daily standups or check-ins track progress and address any blockers.
+- Team retrospectives provide opportunities to evaluate work methods and discuss various topics on a weekly or bi-weekly basis. It's also a time for team members to voice their thoughts.
+
+#### Day 5: Demos & Planning
+Finally, it's time for "race day :racing_car:" or "demo day" on Friday:
+
+- Feature work is wrapped up before the week's end. Brave souls might merge changes into production on Fridays, while others take a more relaxed approach. :beer:
+- Demo sessions are often held, either internally within the team or across the entire company.
+- Grooming and planning for the upcoming week take place, ensuring a smooth transition.
+
 
 ## What are some similarities between F1 and DPT?
 So now that we know how a Formula 1 team and Data Product Team works, let's look at some simularities:
@@ -231,20 +247,19 @@ So now that we know how a Formula 1 team and Data Product Team works, let's look
 ## Learnings from F1 that can be applied to DPT?
 Below follows a table with some key-learnings a Data Product Team can draw from Formula 1:
 
-| **Learnings for Data Product Teams**                        | **Derived from Formula 1 Teams**                     |
+| **Additional Learnings for Data Product Teams**            | **Adopted from Formula 1 Teams**                    |
 |------------------------------------------------------------|------------------------------------------------------|
-| 1. **Continuous Improvement**                               | Embrace incremental improvements and feedback loops. |
-| 2. **Data-Driven Decision-Making**                          | Prioritize data analytics for informed decisions.    |
-| 3. **Cross-Functional Collaboration**                       | Leverage diverse skills within the team effectively. |
-| 4. **Iterative Development**                                | Follow iterative development cycles for agility.     |
-| 5. **Performance Optimization**                             | Optimize product performance and efficiency.         |
-| 6. **Risk Management**                                     | Develop robust risk management strategies.           |
-| 7. **Real-Time Adaptation**                                | Be agile and adaptable to changing circumstances.    |
-| 8. **User-Centered Design**                                | Focus on creating products that solve user problems. |
-| 9. **Strategic Planning**                                  | Develop clear product roadmaps aligned with goals.   |
-| 10. **Resource Efficiency**                                | Allocate resources efficiently for product success.  |
-| 11. **Competitive Positioning**                            | Continuously assess the competitive landscape.       |
-| 12. **Focus on Performance and Value Delivery**             | Prioritize delivering high-performance products.     |
+| 1. **Simulated Testing**                                   | Implement simulated testing environments for products.|
+| 2. **Real-Time Decision-Making Under Pressure**            | Develop the capability to make quick decisions under pressure. |
+| 3. **Pit-Stop Mentality (Rapid Change Execution)**         | Cultivate a mentality of rapid change execution when needed. |
+| 4. **Precision and Attention to Detail**                   | Pay meticulous attention to detail in product development. |
+| 5. **Data-Driven Innovation**                              | Encourage innovative solutions backed by data insights.  |
+| 6. **Driver Feedback (User Feedback)**                     | Establish channels for direct user feedback and incorporate it into product development. |
+| 7. **Telemetry (User Analytics)**                          | Utilize user analytics and monitoring for real-time insights into product usage. |
+| 8. **Race Strategy (Product Roadmap)**                     | Develop a well-defined product roadmap aligned with business goals. |
+| 9. **Cross-Team Communication**                            | Foster open communication between different teams within the organization. |
+| 10. **Post-Race Analysis (Post-Launch Evaluation)**         | Conduct thorough post-launch evaluations and apply lessons learned to future products. |
+
 
 
 
