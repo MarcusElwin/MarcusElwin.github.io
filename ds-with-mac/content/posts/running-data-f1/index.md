@@ -114,36 +114,30 @@ timeline
 The timeline above illustrates how a "regular" race week looks like for a Formula 1 team.
 
 #### Day 1-4: Race Preparation
-In the four days leading up to the race weekend, teams embark on a whirlwind of activity:
 
-- They traverse from the previous race location to the new one.
-- Cars, pits, motorhomes, and garages are transported and set up.
-- The Thursday morning is reserved for strategizing the teardown plan for Sunday.
+- Teams travel to the new race location, transporting and setting up cars, pits, and more.
+- Thursday morning is dedicated to strategizing the teardown plan for Sunday.
 
 #### Day 5: Race Practice
-Friday kicks off with race practice, where teams dive into action:
 
-- Two practice sessions collect live data, fine-tuning computer simulations and race strategies.
-- Teams test new parts, previously validated in wind tunnels or simulations.
-- Drivers acquaint themselves with the track, while engineers adjust cars based on data and driver feedback.
-- In-depth analysis of tire compounds degradation is also on the agenda.
+- Friday's race practice includes two sessions to collect live data, fine-tune simulations, and test new parts.
+- Drivers familiarize themselves with the track, and engineers adjust cars based on data and feedback.
+- In-depth tire compound degradation analysis is conducted.
 
 #### Day 6: Race Qualifying
-Saturdays are packed with events:
 
-- If it's not a sprint weekend, there's a final practice session for last-minute adjustments and qualifying strategy decisions.
-- During qualifying, teams battle for grid positions, and cars enter parc fermé, limiting adjustments until race day.
+- Saturdays feature final practice (if not a sprint weekend) and qualifying sessions.
+- Teams compete for grid positions, and cars enter parc fermé, limiting adjustments.
 - Post-qualifying, the strategy team has precise data for simulations.
-- Pre and post-shows provide extra excitement.
+- Pre and post-shows add excitement.
 
 #### Day 7: Race & Pack-Up
-Finally, Sunday arrives, the big race day :racing_car::
 
-- Teams have a brief window (5 hours) to work on their cars before the formation lap.
-- The formation lap warms up tires and prepares drivers.
-- The race begins, and teams compete for valuable points.
-- As the race unfolds, teams start the pack-up, following the Thursday plan.
-- Post-race, each team holds a debrief session to iron out issues for the next race.
+- Sunday is race day :racing_car::
+- Teams work on cars for 5 hours before the formation lap.
+- The race begins, and teams vie for points.
+- Post-race, teams start pack-up following the Thursday plan.
+- A debrief session helps iron out issues for the next race.
 
 ## How is a Data Products Team (DPT) organized?
 
@@ -219,24 +213,22 @@ timeline
 The timeline above illustrates a "regular" week a typical "product" team using some agile framework such as *kanban* or <cite>*scrum*[^2]<cite>, working in weekly sprints in my experience. 
 
 #### Day 1: Weekly Preparations
-Mondays kick off the week with various activities based on your team's focus:
 
-- Teams often hold a weekly meeting to review last week's progress, set this week's priorities, and potentially launch new initiatives. Some companies rely on Directly Responsible Individuals ([DRIs](https://about.gitlab.com/handbook/people-group/directly-responsible-individuals/)) to lead initiatives, while others may delegate this responsibility to Product Managers or Engineering Managers.
+- Teams kick off the week with a review meeting, setting priorities, and potentially launching new initiatives. Some companies rely on Directly Responsible Individuals ([DRIs](https://about.gitlab.com/handbook/people-group/directly-responsible-individuals/)) to lead initiatives, while others delegate to Product Managers or Engineering Managers.
 - Feature work resumes, gaining momentum.
 
 #### Day 2-4: Feature Work
-Midweek, the focus sharpens on feature development:
 
-- Teams dive into feature work as part of one or more initiatives, leveraging cross-functional collaboration.
-- Daily standups or check-ins track progress and address any blockers.
-- Team retrospectives provide opportunities to evaluate work methods and discuss various topics on a weekly or bi-weekly basis. It's also a time for team members to voice their thoughts.
+- Teams focus on feature development, diving into initiatives with cross-functional collaboration.
+- Daily standups or check-ins track progress and address blockers.
+- Team retrospectives provide opportunities to evaluate work methods and discuss topics on a weekly or bi-weekly basis.
 
 #### Day 5: Demos & Planning
-Finally, it's time for "race day :racing_car:" or "demo day" on Friday:
 
-- Feature work is wrapped up before the week's end. Brave souls might merge changes into production on Fridays, while others take a more relaxed approach. :beer:
-- Demo sessions are often held, either internally within the team or across the entire company.
-- Grooming and planning for the upcoming week take place, ensuring a smooth transition.
+- Feature work wraps up, with some brave souls merging changes into production on Fridays. Others take a more relaxed approach. :beer:
+- Demo sessions are held, either internally or company-wide.
+- Grooming and planning for the upcoming week ensure a smooth transition.
+
 
 
 ## What are some similarities between F1 and DPT?
