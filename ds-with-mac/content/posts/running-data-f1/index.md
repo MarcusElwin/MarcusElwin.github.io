@@ -7,7 +7,7 @@ slug: running-data-f1
 author: Marcus Elwin
 
 draft: false
-date: 2023-08-24T21:58:08+02:00
+date: 2023-09-01T21:58:08+02:00
 lastmod: 
 expiryDate: 
 publishDate: 
@@ -38,7 +38,7 @@ Many, myself included, became avid F1 fans after watching ['Formula 1: Drive to 
 
 In the midst of the 2023 season, [10](https://www.formula1.com/en/teams.html) teams compete, with *Redbull Racing* leading the *constructors* championship :crown:. They owe much of their success to superstar [Max Verstappen](https://sv.wikipedia.org/wiki/Max_Verstappen), but is it all due to him?
 
-In this blog, we delve into F1 and data product teams, uncovering intriguing parallels. Our goal: extract valuable insights for data product teams from the high-speed world of Formula 1.
+In this blog post, we delve into F1 and data product teams, uncovering intriguing parallels. Our goal: extract valuable insights for data product teams from the high-speed world of Formula 1.
 
 Get ready for a thrilling ride!
 
@@ -60,11 +60,13 @@ Get ready for a thrilling ride!
 | Other          | Diverse roles such as PR, marketing, etc.  | 20-90    |
 
 
-The table above shows a rough grouping of different **9** common roles in a Formula 1 team. Depending on the size of the team normally ~**170-600** people are involved in operating a Formula 1 team. Below follows an overview of what each person is in charge of:
+See the table above for the **9** most common roles in a Formula 1 team and depending on the size of the team normally <cite>~**170-600**[^1]<cite> people are involved in the daily operations of the team. 
+
+#### Overview of what each person is in charge of:
 
 * **Team Principal**: The directors of the team, some may come from car manufactors or other are from private companies from e.g. the team owners.
 
-* **F1 Drivers**: The stars of the team driving the F1 cars. Normally there is 2 main drivers,  1 reserve driver and 1 simulation driver. The two main drivers tend to be bitter foes.
+* **F1 Drivers**: The stars of the team driving the F1 cars. Normally there are 2 main drivers,  1 reserve driver and 1 simulation driver. The two main drivers tend to be bitter foes.
 
 * **Assistants**: They are in charge of helping and organzing events, calendars and procedures.
 
@@ -81,7 +83,7 @@ The table above shows a rough grouping of different **9** common roles in a Form
 * **Other**: Chefs, personal trainers,  web and media relations etc.
 
 {{< notice note >}} 
-More and more teams also employs data competencies such as *Data Scientist*, *Data Engineers*, *Analytics Engineers* to make the teams more successful in wind tunnel similations for aerodynamics, making sense of waste amounts of IoT data and even improving the team strategies.
+More and more teams also employs data competencies such as *Data Scientist*, *Data Engineers*, *Analytics Engineers* to make the teams more successful in wind tunnel similations for aerodynamics, making sense of waste amounts of IoT data and even improving the teams strategies.
 {{< /notice >}}
 
 ### Activities during a "normal" race week
@@ -146,17 +148,25 @@ Finally, Sunday arrives, the big race day :racing_car::
 ## How is a Data Products Team (DPT) organized?
 
 ### Digression Data Products?
-To understand what a *data products* team is doing, it might be helpful to discuss what a *data product* is. We will not detail to any larger extent what a data product is in this article, but perhaps in future articles. However, as any sane person would do I did ask for help from *chatGPT*:
+To understand what a *data products* team is doing, it might be helpful to discuss what a *data product* is. We will not detail to any larger extent what a data product is in this article, but perhaps in future articles. 
+
+However, as any sane person would do I did ask for help from *chatGPT*:
 
 {{< notice note >}} 
-A data product is essentially a product that derives its value primarily from data. Unlike traditional products or even most software products, data products are all about using data to provide insights, solve problems, or make predictions. They're like the intersection of technology and data science. So, in simple terms, a data product is something like your weather app that uses data to provide you with valuable information or services, and it's different from regular, physical products or services because it relies on data to function and deliver value.
+A **data product** is essentially a product that derives its value primarily from data. Unlike traditional products or even most software products, data products are all about using data to provide *insights*, *solve problems*, or make *predictions*. They're like the intersection of technology and data science. 
+{{< /notice >}}
+
+Or in even more simple terms:
+
+{{< notice note >}} 
+A **data product** is something like your weather app that uses data to provide you with valuable information or services, and it's different from regular, physical products or services because it relies on data to function and deliver value.
 {{< /notice >}}
 
 ### Typical roles in a Data Products Team
 
 | Role                               | Role Description                                      | # People |
 | ---------------------------------- | ----------------------------------------------------- | -------- |
-| Area Leads / Engineering Directors | Oversee and guide technical domains and strategies.   | 1 - 4    |
+| Area Leads / Engineering Directors | Oversee and guide technical domains and strategies.   | 1-4    |
 | Engineering Managers               | Manage and support engineering teams effectively.     | 1-2      |
 | Product Managers                   | Define product vision and guide development efforts.  | 1-3      |
 | Data Scientists                    | Utilize data for insights and machine learning.       | 3-5      |
@@ -164,11 +174,15 @@ A data product is essentially a product that derives its value primarily from da
 | Designers                          | Create user-centric design for product interfaces.    | 1-2      |
 | Other                              | Diverse roles such as QA, DevOps, etc.                | 5-10     |
 
-* **Area Leads / Engineering Directors**: These folks are the true visionaries of the team, setting the high-level agenda based on the company's grand objectives. Depending on the company's mood, they might share the limelight with the CTO or VP of Engineering.
+**NB**: the roles and number of peoples above are in my experience more common in more *product* oriented companies, whilst at other companies some of these roles may have different names, or be more centralized.
 
-* **Engineering Managers**: Ah, the coaches, the mentors, the team's cheerleaders, if you will. They're all about optimizing the execution of things and have a bizarre fascination with reducing the infamous "technical debt." Some ultra-hip Data Science-focused companies might even sport a peculiar variant known as the "Data Science Manager."
+#### Overview of what each person is in charge of:
 
-* **Product Managers**: The gatekeepers of vision and roadmap. They hold no formal power but are expected to herd cats (read: teams and people) to get things done. Getting folks aligned and doing what they want? Just another day in the sweat spot.
+* **Area Leads / Engineering Directors**: These folks are the true visionaries of the team, setting the high-level agenda based on the company's grand objectives. Depending on the company's mood, they might share the limelight with the CTO or VP of Engineering / Product.
+
+* **Engineering Managers**: Ah, the coaches, the mentors, the team's cheerleaders, if you will. They're all about optimizing the execution of things and have a bizarre fascination with reducing the infamous "technical debt." Some more Data Science-focused companies might even sport a peculiar variant known as the "Data Science Manager."
+
+* **Product Managers**: The gatekeepers of vision and roadmap. They hold no formal power but are expected to herd cats (read: teams and people) to get things done. Getting folks aligned and doing what they want? Just another day in the sweet spot.
 
 * **Data Scientists**: The wizards, the data wranglers, the folks who make magic happen with data. They casually throw around terms like ML, LLMs, and AI, but deploying? Well, that's not always their cup of tea. Many of them prefer cozying up to Jupyter notebooks. Some companies even call them "AI Engineers," "ML Engineers," or the trendy "Generative AI Engineers." And hey, have you heard of the mystical "[Decision Scientist](https://chds.hsph.harvard.edu/approaches/what-is-decision-science/)"? No one's quite sure what makes them different from regular Data Scientists, but it's a mystery we're not solving today.
 
@@ -176,7 +190,7 @@ A data product is essentially a product that derives its value primarily from da
 
 * **Designers**: The true artists of the digital realm, they're all about Figma and crafting user journeys. Sometimes, they're the mysterious outsiders, dwelling beyond the borders of the product team. Whatever you do, don't let them leave – you'd be lost without them.
 
-* **Other**: These are the unsung heroes, often students in desperate need of cash :moneybag:. Some companies go all out and hire data annotation firms, known for their *interesting* practices. [Read more](https://www.context.news/ai/ai-boom-is-dream-and-nightmare-for-workers-in-global-south) about their adventures if you dare.
+* **Other**: These are the unsung heroes, often students in desperate need of cash :moneybag:. Some companies go all out and hire data annotation firms, known for their *interesting* [practices](https://www.context.news/ai/ai-boom-is-dream-and-nightmare-for-workers-in-global-south).
 
 ### Activities during a "normal" business week
 
@@ -202,7 +216,7 @@ timeline
         : Grooming / Planning
 {{</mermaid>}}
 
-The timeline above illustrates a "regular" week a typical "product" using some agile framework such as *kanban* or *scrum* team, working in weekly sprints in my experience. 
+The timeline above illustrates a "regular" week a typical "product" team using some agile framework such as *kanban* or <cite>*scrum*[^2]<cite>, working in weekly sprints in my experience. 
 
 #### Day 1: Weekly Preparations
 Mondays kick off the week with various activities based on your team's focus:
@@ -226,7 +240,7 @@ Finally, it's time for "race day :racing_car:" or "demo day" on Friday:
 
 
 ## What are some similarities between F1 and DPT?
-So now that we know how a Formula 1 team and Data Product Team works, let's look at some simularities:
+Now that we know how both types of teams work, let's look at some simularities:
 
 | **Similarities**                            | **Formula 1 Team**                                        | **Data Product Team**                                       |
 |--------------------------------------------|-----------------------------------------------------------|--------------------------------------------------------------|
@@ -245,23 +259,34 @@ So now that we know how a Formula 1 team and Data Product Team works, let's look
 
 
 ## Learnings from F1 that can be applied to DPT?
-Below follows a table with some key-learnings a Data Product Team can draw from Formula 1:
+When looking at how a F1 team is operating, there are mainly 3 key areas where a data product team can draw inspiration and learnings from:
+* *Strategies for High-Performance Product Development*
+* *Data-Driven Insights and User-Centricity*
+* *Post-Launch Evaluation*
 
-| **Additional Learnings for Data Product Teams**            | **Adopted from Formula 1 Teams**                    |
-|------------------------------------------------------------|------------------------------------------------------|
-| 1. **Simulated Testing**                                   | Implement simulated testing environments for products.|
-| 2. **Real-Time Decision-Making Under Pressure**            | Develop the capability to make quick decisions under pressure. |
-| 3. **Pit-Stop Mentality (Rapid Change Execution)**         | Cultivate a mentality of rapid change execution when needed. |
-| 4. **Precision and Attention to Detail**                   | Pay meticulous attention to detail in product development. |
-| 5. **Data-Driven Innovation**                              | Encourage innovative solutions backed by data insights.  |
-| 6. **Driver Feedback (User Feedback)**                     | Establish channels for direct user feedback and incorporate it into product development. |
-| 7. **Telemetry (User Analytics)**                          | Utilize user analytics and monitoring for real-time insights into product usage. |
-| 8. **Race Strategy (Product Roadmap)**                     | Develop a well-defined product roadmap aligned with business goals. |
-| 9. **Cross-Team Communication**                            | Foster open communication between different teams within the organization. |
-| 10. **Post-Race Analysis (Post-Launch Evaluation)**         | Conduct thorough post-launch evaluations and apply lessons learned to future products. |
+### Strategies for High-Performance Product Development
+
+1. **Simulated Testing**: F1 teams extensively use simulations for various aspects. Data Product teams can benefit from more simulated testing alongside A/B or bandit testing.
+
+2. **Real-Time Decision-Making Under Pressure**: F1 teams make quick decisions under race-day pressure. Data Product Teams face similar challenges, like deciding to implement chatGPT in response to a competitor.
+
+3. **Pit-Stop Mentality (Rapid Change Execution)**: In F1, pit stops take less than <cite>3 seconds<cite>[^3], emphasizing rapid execution. Data Product teams might not have such urgency, but they can practice rapid execution through continuous planning.
 
 
+4) **Precision and Attention to Detail**: A F1 team pay meticulous attention to detail in product development, as very small changes can mean winning or losing a race. Similar can be said about a Data Product Team, where your clients will notice if you pay attention to details and their needs.
 
+### Data-Driven Insights and User-Centricity
 
-[^1]: Depending on track and circuit the drivers can reach up to 345km/h or 214mph, see more [here](https://www.autosport.com/f1/news/how-fast-is-an-f1-car-top-speeds-of-f1-indycar-motogp-and-more-4980734/4980734/)
+1. **Driver Feedback (User Feedback)**: Data Product Teams collect user feedback through interviews or surveys. In F1, drivers are crucial customers, <cite>product "experts"<cite>[^4], and <cite>"evangelists"<cite>[^5]. They have daily access to drivers, frequently incorporating their input into the "product." The cadence of this information sets F1 apart. In short, treat your customers like F1 drivers for your product.
 
+2. **Telemetry (User Analytics)**: F1 teams, like data product teams, monitor and gather real-time data on their cars, using a plethora of sensors for comprehensive insights. This informs their strategies and complements driver feedback. Data Product Teams excel in this area but can learn to measure even more user behavior.
+
+### Post-Launch Evaluation
+
+1. **Post-Race Analysis (Post-Launch Evaluation)**: After each race, F1 teams conduct post-race analyses to find improvements and insights for the next race. This is a weekly practice for them. Data Product Teams might do something similar after retrospectives or the completion of significant initiatives. The difference is F1's consistent weekly process, which Data Product Teams can learn from. In short, consider post-evaluation after each release if possible.
+
+[^1]: Based on estimates [here](https://onestopracing.com/how-do-f1-teams-work/) note that this may vary in each team.
+[^2]: Or a mix of both scrum and kanban knowns as *scrumban*, or plain good ol *waterfall* methodologies, read more [here](https://asana.com/resources/scrumban).
+[^3]: This of course depends on the circuit, see more [here](https://en.wikipedia.org/wiki/Pit_stop#:~:text=A%20pit%20stop%20typically%20takes,stops%2C%20depending%20on%20the%20circuit.)
+[^4]: The F1 drivers has an extraordinary feel for the car, what setup they should have and shouldn't have.
+[^5]: If the F1 driver feels comfortable with the car i.e. product, they will perform if not they will let you know that you suck.
