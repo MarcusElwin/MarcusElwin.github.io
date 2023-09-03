@@ -1,14 +1,14 @@
 ---
 title: Running your Data Products Team as a F1 team
 seo_title: Running Data your Data Products Team as a F1 team
-summary: In formula 1 and for data product teams, the sum is not greater than its parts.
+summary: In formula 1 and for data product teams, the sum is greater than its parts.
 description: 
 slug: running-data-f1
 author: Marcus Elwin
 
 draft: false
 date: 2023-09-01T21:58:08+02:00
-lastmod: 
+lastmod: 2023-09-03T21:58:08+02:00
 expiryDate: 
 publishDate: 
 
@@ -184,7 +184,7 @@ A **data product** is something like your weather app that uses data to provide 
 
 * **Designers**: The true artists of the digital realm, they're all about Figma and crafting user journeys. Sometimes, they're the mysterious outsiders, dwelling beyond the borders of the product team. Whatever you do, don't let them leave – you'd be lost without them.
 
-* **Other**: These are the unsung heroes, often students in desperate need of cash :moneybag:. Some companies go all out and hire data annotation firms, known for their *interesting* [practices](https://www.context.news/ai/ai-boom-is-dream-and-nightmare-for-workers-in-global-south).
+* **Other**: These are the unsung heroes, often students in desperate need of cash :moneybag:. But also QA, Delivery, Marketing etc. Some companies go all out and hire data annotation firms, known for their *interesting* [practices](https://www.context.news/ai/ai-boom-is-dream-and-nightmare-for-workers-in-global-south).
 
 ### Activities during a "normal" business week
 
