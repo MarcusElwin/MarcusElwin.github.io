@@ -184,7 +184,7 @@ A **data product** is something like your weather app that uses data to provide 
 
 * **Designers**: The true artists of the digital realm, they're all about Figma and crafting user journeys. Sometimes, they're the mysterious outsiders, dwelling beyond the borders of the product team. Whatever you do, don't let them leave – you'd be lost without them.
 
-* **Other**: These are the unsung heroes, often students in desperate need of cash :moneybag:. But also QA, Delivery, Mareketing etc. Some companies go all out and hire data annotation firms, known for their *interesting* [practices](https://www.context.news/ai/ai-boom-is-dream-and-nightmare-for-workers-in-global-south).
+* **Other**: These are the unsung heroes, often students in desperate need of cash :moneybag:. But also QA, Delivery, Marketing etc. Some companies go all out and hire data annotation firms, known for their *interesting* [practices](https://www.context.news/ai/ai-boom-is-dream-and-nightmare-for-workers-in-global-south).
 
 ### Activities during a "normal" business week
 
