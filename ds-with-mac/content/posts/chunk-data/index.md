@@ -31,10 +31,12 @@ newsletter: true
 disable_comments: false
 ---
 
-Recently I had to work with a large client dataset of 100+ million rows and do quite some data cleaning and plumbing :wrench: to prepare this dataset for running a parallel batch job. What it boiled down to was to create `chunks` of `1000` users to use in the batch job. In this post I'll share one nice method of doing so in `BigQuery` to reduce chunking time from *hours* down to *minutes*!
+Recently I had to work with a large client dataset of 100+ million rows and do quite some data cleaning and plumbing :wrench: to prepare this dataset for running a parallel batch job. What it boiled down to was to create `chunks` of `1000` users to use in the batch job. 
+
+In this post I'll share one nice method of doing so in `BigQuery` to reduce chunking and data export time from *hours* down to *minutes*!
 
 ## Chunking 
-When processing data that contains a large number of records, processing each record one by one can be quite slow. Often data is also fetched from external sources such as API. Whilst processing data in memory tends to be fast, there are natural memory limitations. By *chunking* the data the processing of the job can be speed up multifold. A *chunk* is simple a grouped of records according to some key and size e.g. chunks of `1000` users in each file. In order to fit everything in memory.
+When processing data that contains a large number of records, processing each record *one-by-one* can be quite slow. Often data is also fetched from external sources such as an API. Whilst processing data in memory tends to be fast, there are natural memory limitations. By *chunking* the data the processing of the job can be speed up **multifold**. A *chunk* is simple a grouped of records according to some key and size e.g. chunks of `1000` users in each file. In order to fit everything in memory.
 
 ## Chunking the "naive" pythonic way
 Let's say that you have a table called `transactions` with the schema below and `100` million transactions and `50` thousand unique users:
@@ -106,10 +108,10 @@ for user_id_list in chunk_list(df_userids.userid.tolist(), 1000):
     df_batch = pd.read_csv(result)
 {{< / highlight >}}
 
-Although the code looks easy to understand, testing this on `100` million transactions takes roughly `~7+` hours. This is way to slow and we can do much better :brain:.
+Although the code looks easy to understand, testing this on `100` million transactions takes roughly `~7+` hours. This is **way to slow** and we can do much better :brain:.
 
 ## Chunking using BigQuery
-As BigQuery is "practically" spark under the hood we can use `partitioning` and especially two inbult functions [NTILE](https://cloud.google.com/bigquery/docs/reference/standard-sql/numbering_functions#ntile) and [RANGE_BUCKET](https://cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#range_bucket).
+As BigQuery is "practically" spark under the hood we can use `partitioning` and especially two inbuilt functions [NTILE](https://cloud.google.com/bigquery/docs/reference/standard-sql/numbering_functions#ntile) and [RANGE_BUCKET](https://cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#range_bucket).
 
 What the `NTILE` function is doing:
 {{< notice info >}} 
@@ -190,3 +192,38 @@ ORDER BY
 {{< / highlight >}}
 
 The nice thing with the partition and `EXPORT DATA` is that this is much faster the then the pytonic approach. Exporting 50 partitions files takes roughly `~30-40` minutes instead if `7+` hours :rocket:.
+
+{{< notice tip >}} 
+By default `BigQuery` exports data `>= 1GB` to several files. This is true even if you have partitions in your dataset. If you want to force your export to only save output to 1 file given that the size of each file is `< 1 GB` you can add a `LIMIT` statement to e.g. `MAX_INTEGER` to force all data to the same worker.
+
+{{< /notice >}}
+
+An update query if you want to make sure that you save each partition to 1 file:
+{{< highlight sql "linenos=inline, style=monokai" >}}
+DECLARE num_files INT64;
+SET num_files = 50;
+FOR item in (SELECT idx FROM UNNEST(GENERATE_ARRAY(1, num_files + 1, 1))) AS idx WHERE idx < num_files
+DO
+EXPORT DATA
+  OPTIONS (
+    uri = 'gs://trx_user_batches/user_batch_*.csv',
+    format = 'CSV',
+    overwrite = true,
+    header = true,
+    field_delimiter = ';')
+AS (
+SELECT
+  *
+FROM 
+  `project.dataset.trx_user_batches` 
+WHERE
+    id = item.idx
+ORDER BY
+  userid ASC,
+  accountid ASC,
+  date ASC
+LIMIT
+    9223372036854775807
+);
+END FOR;
+{{< / highlight >}}
