@@ -15,3 +15,14 @@ typos ./ds-with-mac/content/
 # correct typos in folder
 typos ./ds-with-mac/content/ -w
 ```
+
+### Creating posts
+```sh
+# create new post
+hugo new posts/<name>/index.md
+```
+
+```sh
+# server website locally
+hugo server
+```
