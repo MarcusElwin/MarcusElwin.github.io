@@ -194,5 +194,36 @@ ORDER BY
 The nice thing with the partition and `EXPORT DATA` is that this is much faster the then the pytonic approach. Exporting 50 partitions files takes roughly `~30-40` minutes instead if `7+` hours :rocket:.
 
 {{< notice tip >}} 
-By default `BigQuery` exports data `>= 1GB` to several files. If you want to force your export to only save output to 1 file given that the size of each file is 1 GB you can add a `LIMIT` statment to e.g. `MAX_INTEGER` to force all data to the same worker.
+By default `BigQuery` exports data `>= 1GB` to several files. This is true even if you have partitions in your dataset. If you want to force your export to only save output to 1 file given that the size of each file is `< 1 GB` you can add a `LIMIT` statement to e.g. `MAX_INTEGER` to force all data to the same worker.
+
 {{< /notice >}}
+
+An update query if you want to make sure that you save each partition to 1 file:
+{{< highlight sql "linenos=inline, style=monokai" >}}
+DECLARE num_files INT64;
+SET num_files = 50;
+FOR item in (SELECT idx FROM UNNEST(GENERATE_ARRAY(1, num_files + 1, 1))) AS idx WHERE idx < num_files
+DO
+EXPORT DATA
+  OPTIONS (
+    uri = 'gs://trx_user_batches/user_batch_*.csv',
+    format = 'CSV',
+    overwrite = true,
+    header = true,
+    field_delimiter = ';')
+AS (
+SELECT
+  *
+FROM 
+  `project.dataset.trx_user_batches` 
+WHERE
+    id = item.idx
+ORDER BY
+  userid ASC,
+  accountid ASC,
+  date ASC
+LIMIT
+    9223372036854775807
+);
+END FOR;
+{{< / highlight >}}
