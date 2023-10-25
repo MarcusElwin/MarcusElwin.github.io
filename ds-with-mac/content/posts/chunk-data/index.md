@@ -198,11 +198,11 @@ By default `BigQuery` exports data `>= 1GB` to several files. This is true even 
 
 {{< /notice >}}
 
-An update query if you want to make sure that you save each partition to 1 file:
+An update to the query if you want to make sure that you save each partition to 1 file:
 {{< highlight sql "linenos=inline, style=monokai" >}}
 DECLARE num_files INT64;
 SET num_files = 50;
-FOR item in (SELECT idx FROM UNNEST(GENERATE_ARRAY(1, num_files + 1, 1))) AS idx WHERE idx < num_files
+FOR item in (SELECT idx FROM UNNEST(GENERATE_ARRAY(1, num_files + 1, 1)) AS idx WHERE idx < num_files)
 DO
 EXPORT DATA
   OPTIONS (
