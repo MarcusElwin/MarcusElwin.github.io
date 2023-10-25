@@ -165,9 +165,9 @@ SELECT
 FROM 
   transactions AS trx
 INNER JOIN
-  report_bucket AS rb
+  user_bucket AS ub
 ON
-  AND trx.userid = rb.userid
+  AND trx.userid = ub.userid
 {{< / highlight >}}
 The nice thing with this query apart form it being fast is that we get `50` partitions with `~1000` users in each file or around `2` million transactions per file. This is a much smaller dataset that we can fit in memory compared to the `100` million rows we started with. For instance if you want to export the partitions as files for another job or workflow you could use:
 
