@@ -8,7 +8,7 @@ author: Marcus Elwin
 
 draft: false
 date: 2023-10-25T21:53:32+02:00
-lastmod: 
+lastmod: 2023-10-26T07:43:32+02:00
 expiryDate: 
 publishDate: 
 
@@ -27,16 +27,16 @@ series:
 toc: true
 related: true
 social_share: true
-newsletter: true
+newsletter: false
 disable_comments: false
 ---
 
-Recently I had to work with a large client dataset of 100+ million rows and do quite some data cleaning and plumbing :wrench: to prepare this dataset for running a parallel batch job. What it boiled down to was to create `chunks` of `1000` users to use in the batch job. 
+Recently I had to work with a large client dataset of `100+` million rows and do quite some data cleaning and plumbing. :wrench: In order to prepare this dataset for running a parallel batch job. What it boiled down to in the end, was to create `chunks` of `1000` users in the batch job. 
 
-In this post I'll share one nice method of doing so in `BigQuery` to reduce chunking and data export time from *hours* down to *minutes*!
+In this post I'll share one nice way of doing so in `BigQuery` to reduce chunking and data export time from *hours* down to *minutes*!
 
 ## Chunking 
-When processing data that contains a large number of records, processing each record *one-by-one* can be quite slow. Often data is also fetched from external sources such as an API. Whilst processing data in memory tends to be fast, there are natural memory limitations. By *chunking* the data the processing of the job can be speed up **multifold**. A *chunk* is simple a grouped of records according to some key and size e.g. chunks of `1000` users in each file. In order to fit everything in memory.
+When processing data that contains a large number of records, processing each record *one-by-one* can be quite slow. Often data is also fetched from external sources such as an API. Whilst processing data in memory tends to be fast, there are natural memory limitations based on your compute instance. By *chunking* the data the processing of the job can be speed up **multifold**. A *chunk* is simple a grouped set of records according to some key and size e.g. chunks of `1000` users in each file. In order to fit everything in memory.
 
 ## Chunking the "naive" pythonic way
 Let's say that you have a table called `transactions` with the schema below and `100` million transactions and `50` thousand unique users:
@@ -169,7 +169,7 @@ INNER JOIN
 ON
   AND trx.userid = ub.userid
 {{< / highlight >}}
-The nice thing with this query apart form it being fast is that we get `50` partitions with `~1000` users in each file or around `2` million transactions per file. This is a much smaller dataset that we can fit in memory compared to the `100` million rows we started with. For instance if you want to export the partitions as files for another job or workflow you could use:
+ With this query we get `50` partitions with `~1000` users in each file or around `2` million transactions per file. This is a much smaller dataset that we can fit in memory (i.e. `Pandas`) compared to the `100` million rows we started with. For instance if you want to export the partitions as files for another job or workflow you could use:
 
 {{< highlight sql "linenos=inline, style=monokai" >}}
 EXPORT DATA
@@ -191,7 +191,7 @@ ORDER BY
 );
 {{< / highlight >}}
 
-The nice thing with the partition and `EXPORT DATA` is that this is much faster the then the pytonic approach. Exporting 50 partitions files takes roughly `~30-40` minutes instead if `7+` hours :rocket:.
+The nice thing with having the partitions and using `EXPORT DATA` statement, is that this is much faster the then the pytonic approach in terms of chunking. Exporting 50 partitions files takes roughly `~30-40` minutes instead if `7+` hours :rocket:.
 
 {{< notice tip >}} 
 By default `BigQuery` exports data `>= 1GB` to several files. This is true even if you have partitions in your dataset. If you want to force your export to only save output to 1 file given that the size of each file is `< 1 GB` you can add a `LIMIT` statement to e.g. `MAX_INTEGER` to force all data to the same worker.
@@ -206,7 +206,7 @@ FOR item in (SELECT idx FROM UNNEST(GENERATE_ARRAY(1, num_files + 1, 1)) AS idx 
 DO
 EXPORT DATA
   OPTIONS (
-    uri = 'gs://trx_user_batches/user_batch_*.csv',
+    uri = CONCAT('gs://trx_user_batches/user_batch_*', item.idx, '.csv'),
     format = 'CSV',
     overwrite = true,
     header = true,
