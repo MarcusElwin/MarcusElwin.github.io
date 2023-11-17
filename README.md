@@ -4,6 +4,13 @@
 
 DS portfolio websites + blog made easily in Hugo
 
+# Setup 🛠️
+1. Install hugo `brew install hugo`
+2. Init & update submodules
+   ```sh
+   git submodule init && git submodule update
+   ```
+
 ## Typo checks
 This repo uses [typos](https://github.com/crate-ci/typos/tree/master) for typo checks to run locally:
 ```sh
