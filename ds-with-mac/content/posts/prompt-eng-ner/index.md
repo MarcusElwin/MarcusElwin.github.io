@@ -482,5 +482,9 @@ The output from the first prompt is:
 {{< / highlight >}}
 We then use the output from the prompt above as input to our `extract_food_entities` prompt from before. This approach may be helpful when you have entities that need to be calculated with some reasoning around them or they may not be in the exact format that you have in your JSON schema.
 
+{{< notice tip >}} 
+**Tip 7**: `Prompt-Chaining` can help as an import pre-processing step to provide more relevant context.
+{{< /notice >}}
+
 ## Closing Remarks
 In this post, we have been walking through some useful prompt-engineering techniques that might be helpful when you deal with Named Entity Recognition (NER) using LLMs such as OpenAI. Depending on your use-case one or several of these techniques may help improve your NER solution. However, writing clear instructions, using CoT and or prompt chaining together with `tools` or `functions` tend to improve the NER extraction.
