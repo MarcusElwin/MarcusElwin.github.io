@@ -58,7 +58,7 @@ Prompt engineering is not just about designing and developing prompts. It encomp
 
 Like any other artifact prompts may be outdated or "drift" which is why it is important to have systems in place to do:
 * _Experiment_ tracking of prompts
-* _Evaluating_ your prompts (either via "_golden dataset_" approach, LLM-based _evals_ or both)
+* _Evaluating_ your prompts (either via the "_golden dataset_" approach, LLM-based _evals_ or both)
 * _Observability_ of how your prompts are being used
 * _Versioning_ of your prompts. 
 
@@ -85,7 +85,7 @@ at [O]
 Mcdonalds [B-LOC]
 {{< / highlight >}}
 
-However, the BIO notation does not make sense for all use case. Let's say that if you are interested in extracting _food_ entities then _hamburger_ above might be a key entity or tag that you want to predict. You can add any labels you like for your NER task as long as you have labeled entities to use.
+However, the BIO notation does not make sense for all use cases. Let's say that if you are interested in extracting _food_ entities then _hamburger_ above might be a key entity or tag that you want to predict. You can add any labels you like for your NER task as long as you have labeled entities to use.
 
 Usually, a "typical" NER pipeline [^3] comprises the following steps:
 1. `tokenizer`: Turn text into *tokens*
@@ -108,7 +108,7 @@ Before we start with prompt engineering let's create an example of where we want
 In the following section we will assume the following:
 1. We are a food tech startup that provides and sells custom smart purchase lists to retailers from online food recipes.
 2. We want to extract the following type of entities: `FOOD`, `QUANTITY`, `UNIT`, `PHYSICAL_QUALITY`, `COLOR`
-3. When we have the `entities` we want to populate smart purchase stores with recommendations on where to get the food.
+3. When we have the `entities` we want to populate smart purchase lists with recommendations on where to get the food.
 
 The example [recipe](https://www.carolinescooking.com/chashu-pork/#recipe) that we will be using:
 
@@ -116,7 +116,7 @@ The example [recipe](https://www.carolinescooking.com/chashu-pork/#recipe) that 
 
 ### Chashu pork (for ramen and more)
 Chashu pork is a classic way to prepare pork belly for Japanese dishes such as ramen. 
-While it takes a little time, it's relatively hands off and easy, and the result is delicious.
+While it takes a little time, it's relatively hands-off and easy, and the result is delicious.
 
 ### Ingredients
 2 lb pork belly or a little more/less
@@ -157,21 +157,21 @@ Recently OpenAI added the functionality to set the [seed](https://cookbook.opena
 
 Both the previous section and this section were more focused on model parameters. The following sections will instead focus on what `Prompt Engineering` techniques we can use to extract named entities.
 
-## Technique #3 - Use clear instructions 
-Next step is to use `clear` instructions to the agent normally:
+## Technique #3 - Use clear instructions
+The next step is to use `clear` instructions to the agent normally:
 * `System` prompt is used for instructions
-* `User` prompt to provided context and data
+* `User` prompt to provide context and data
 * (`Assistant`) prompt to provide examples
 
 Starting with a prompt like the below:
 {{< highlight markdown "linenos=inline, style=monokai" >}}
 
 System:
-You are a food AI assistant that is an expert in natural language processing
+You are a food AI assistant who is an expert in natural language processing
 and especially name entity recognition.
 
 User:
-Extract all food related entities from the recipe below in backticks:
+Extract all food-related entities from the recipe below in backticks:
 ```{recipe}```
 ...
 {{< / highlight >}}
@@ -199,18 +199,22 @@ The food-related entities present in the recipe are as follows:
 These entities cover the main ingredients used for the Chashu pork recipe.
 {{< / highlight >}}
 
+{{< notice tip >}} 
+**Tip 3**: TBA
+{{< /notice >}}
+
 <TODO: Add improved prompt>
 
 ## Technique #4 - Use `function` or `tools` API
-When we use `functions` or `tools` we prompt the model to provided input arguments for an actual function in a downstream manner. The functions will also be part of the system prompt. Many of the latest models have been fine-tuned to work with function calling and thus produce valid `JSON` output in that way. 
+When we use `functions` or `tools` we prompt the model to provide input arguments for an actual function in a downstream manner. The functions will also be part of the system prompt. Many of the latest models have been fine-tuned to work with function calling and thus produce valid `JSON` output in that way. 
 
-In order to define a function we defina a `jsonSchema` as below:
+In order to define a function we define a `jsonSchema` as below:
 
 {{< highlight json "linenos=inline, style=monokai" >}}
 
 {
     "name": "extract_food_entities",
-    "description": "Your a food AI assistant. Your task is to extract food entities from a recipe based on the json schema. You are to return the output as valid json.",
+    "description": "You are a food AI assistant. Your task is to extract food entities from a recipe based on the json schema. You are to return the output as valid json.",
     "parameters": {
       "type": "object",
       "properties": {
@@ -221,7 +225,7 @@ In order to define a function we defina a `jsonSchema` as below:
               "type": "string",
               "description": "The name of the food item"
             },
-            "quntity": {
+            "quantity": {
               "type": "string",
               "description": "The quantity of the food item"
               
@@ -241,7 +245,7 @@ In order to define a function we defina a `jsonSchema` as below:
           },
           "required": [
             "food", 
-            "quntity",
+            "quantity",
             "unit",
             "physicalQuality",
             "color"
@@ -255,12 +259,126 @@ In order to define a function we defina a `jsonSchema` as below:
   }
 {{< / highlight >}}
 
+The example output of using the `extract_food_entities` below is:
+{{< highlight json "linenos=inline, style=monokai" >}}
+
+{
+    "food-metadata": {
+        "food": "Pork Belly",
+        "quantity": "2",
+        "unit": "lb",
+        "physicalQuality": "-",
+        "color": "-"
+    }
+}
+{{< / highlight >}}
+
+{{< notice tip >}} 
+**Tip 4**: Use `tools` or `function` calling with a `jsonSchema` to extract wanted metadata.
+{{< /notice >}}
 
 ## Technique #5 - Use domain prompts 
-Exercitation non excepteur officia eu sed irure tempor ex laborum sed cupidatat mollit elit reprehenderit nostrud. Laboris voluptate minim eu lorem ad eu do sit culpa.
+As seen above using the `jsonSchema` above gives us metadata in a structured format that we can use for downstream processing. However, there are some limitations in the number of characters you can set in the description for each `property` in the `jsonSchema`. One way to give further instructions to the LLM is to add `domain-specific` instruction in e.g. the `system` prompt:
+
+{{< highlight markdown "linenos=inline, style=monokai" >}}
+
+System:
+You are a food AI assistant who is an expert in natural language processing
+and especially name entity recognition. The entities we are interested in are: "food", "quantity", "unit", "physicalQuality" and "color". 
+
+See further instructions below for each entity:
+
+"food": This can be both liquid and solid food such as meat, vegetables, alcohol, etc. 
+
+"quantity": The exact quantity or amount of the food that should be used in the recipe. Answer in both full units such as 1,2,3, etc but also fractions e.g. 1/3, 2/4, etc. 
+
+"unit": The unit being used e.g. grams, milliliters, pounds, etc. The unit must always be returned.
+
+"physicalQuality": The characteristic of the ingredient (e.g. boneless for chicken breast, frozen for
+spinach, fresh or dried for basil, powdered for sugar).
+
+"color": The color of the food e.g. green, black, white. If no color is identified respond with colorless.
+
+User:
+Extract all food-related entities from the recipe below in backticks:
+```{recipe}```
+...
+{{< / highlight >}}
+
+Example output with this update prompt is shown below:
+{{< highlight json "linenos=inline, style=monokai" >}}
+
+{
+    "food-metadata": {
+        "food": "pork belly",
+        "quantity": "2 lb",
+        "unit": "pound",
+        "physicalQuality": "raw",
+        "color": "colorless"
+    }
+}
+
+{
+    "food-metadata": {
+        "food": "green onions", 
+        "quantity": "2",
+        "unit": "pieces",
+        "physicalQuality": "fresh",
+        "color": "green"
+    }
+}
+{{< / highlight >}}
+{{< notice tip >}} 
+**Tip 5**: Incorporate `domain` knowledge to help the LLM with extracting the entities you are looking for.
+{{< /notice >}}
 
 ## Technique #6 - Use Chain-of-Thought
-Exercitation non excepteur officia eu sed irure tempor ex laborum sed cupidatat mollit elit reprehenderit nostrud. Laboris voluptate minim eu lorem ad eu do sit culpa.
+{{< notice info >}} 
+Chain-of-Thought (CoT) is a prompting technique where each input question is followed by an intermediate reasoning step, that leads to the final answer. This shown to improve the the output from LLMs. There is also a slight variation of CoT called _Zero-Shot Chain-of-Thought_ where you introduce **“Let’s think step by step”** to guide the LLM's reasoning.
+{{< /notice >}}
+
+An update to the prompt now would be:
+
+{{< highlight markdown "linenos=inline, style=monokai" >}}
+
+System:
+You are a food AI assistant who is an expert in natural language processing
+and especially name entity recognition. The entities we are interested in are: "food", "quantity", "unit", "physicalQuality" and "color". 
+
+See further instructions below for each entity:
+
+"food": This can be both liquid and solid food such as meat, vegetables, alcohol, etc. 
+
+"quantity": The exact quantity or amount of the food that should be used in the recipe. Answer in both full units such as 1,2,3, etc but also fractions e.g. 1/3, 2/4, etc. 
+
+"unit": The unit being used e.g. grams, milliliters, pounds, etc. The unit must always be returned.
+
+"physicalQuality": The characteristic of the ingredient (e.g. boneless for chicken breast, frozen for
+spinach, fresh or dried for basil, powdered for sugar).
+
+"color": The color of the food e.g. green, black, white. If no color is identified respond with colorless.
+
+Let's think step-by-step.
+
+User:
+Extract all food-related entities from the recipe below in backticks:
+```{recipe}```
+...
+{{< / highlight >}}
+
+By adding **“Let’s think step by step”** we can see some slight improvements for the extraction:
+{{< highlight json "linenos=inline, style=monokai" >}}
+
+{
+    "food-metadata": {
+        "food": "pork belly", "quantity": "2 lb",
+        "unit": "ounce",
+        "physicalQuality": "trimmed",
+        "color": "colorless"
+    }
+}
+{{< / highlight >}}
+Trimmed is a better `physicalQuality` used instead of `raw` for the pork belly as it is sliced and used as a topping e.g. ramen.
 
 ## Technique #7 - Use Prompt Chaining
 Exercitation non excepteur officia eu sed irure tempor ex laborum sed cupidatat mollit elit reprehenderit nostrud. Laboris voluptate minim eu lorem ad eu do sit culpa.
