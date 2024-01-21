@@ -7,7 +7,7 @@ slug: prompt-eng-ner
 author: Marcus Elwin
 
 draft: false
-date: 2024-01-14T16:23:42+01:00
+date: 2024-01-21T16:23:42+01:00
 lastmod: 
 expiryDate: 
 publishDate: 
@@ -31,7 +31,7 @@ newsletter: false
 disable_comments: false
 ---
 
-**2023** was the year of *exploration*, *testing* and *proof-of-concepts* or deployment of smaller LLM-powered workflows/use cases for many organizations. Whilst 2024 will likely be the year where we will see even more production systems leveraging LLMs. Compared to a traditional ML system where data (examples, labels), model and weights are artifacts. Prompts used for driving a certain behavior of an assistant or agent are one of the **main** artifacts. 
+**2023** was the year of *exploration*, *testing* and *proof-of-concepts* or deployment of smaller LLM-powered workflows/use cases for many organizations. Whilst 2024 will likely be the year where we will see even more production systems leveraging LLMs. Compared to a traditional ML system where data (examples, labels), model and weights are artifacts, prompts are the **main** artifacts. Prompts and prompt engineering are used for driving a certain behavior of an assistant or agent.
 
 Therefore many of the large players as well as academia have provided guides on how to prompt LLMs efficiently:
 1. :computer: [OpenAI Prompt Engineering](https://platform.openai.com/docs/guides/prompt-engineering)
@@ -39,13 +39,15 @@ Therefore many of the large players as well as academia have provided guides on 
 3. :computer: [Principled Instructions Are All You Need for Questioning LLaMA-1/2, GPT-3.5/4](https://arxiv.org/abs/2312.16171)
 4. :computer: [Prompt Engineering Guide](https://www.promptingguide.ai/)
 
-Many of these guides are quite **generic** and can work for many different use cases. However, there are very few guides mentioning best practices for constructing prompts for *Named Entity Recognition (NER)*. OpenAI has for instance a [cookbook](https://cookbook.openai.com/examples/named_entity_recognition_to_enrich_text) for `NER`  as well as [this](https://arxiv.org/pdf/2305.15444.pdf) and [this](https://arxiv.org/pdf/2310.17892.pdf) paper which both suggested a method called `Prompt-NER`. In this article, we will discuss some techniques that might be helpful when using LLM for NER use cases. To set the stage we will first start with defining what *Prompt Engineering* and *Named Entity Recognition* actually are.
+Many of these guides are quite **generic** and can work for many different use cases. However, there are very few guides mentioning best practices for constructing prompts for *Named Entity Recognition (NER)*. OpenAI has for instance a [cookbook](https://cookbook.openai.com/examples/named_entity_recognition_to_enrich_text) for `NER`  as well as [this](https://arxiv.org/pdf/2305.15444.pdf) and [this](https://arxiv.org/pdf/2310.17892.pdf) paper which both suggested a method called `Prompt-NER`. 
+
+In this article, we will discuss some techniques that might be helpful when using LLM for NER use cases. To set the stage we will first start with defining what *Prompt Engineering* and *Named Entity Recognition* are.
 
 
 ## Prompt Engineering
-Prompt Engineering sometimes feels more like an *art* compared to *science* but there are more and more best practices showing up (see some of the references in the previous section). 
+Prompt Engineering sometimes feels more like an *art* compared to *science* but there are more best practices showing up (see some of the *references* in the previous section). 
 
-See one definition below for `Prompt Engineering`:
+One definition of `Prompt Engineering` is shown below:
 
 {{< notice info >}} 
 Prompt engineering is a relatively new discipline for developing and optimizing prompts to efficiently use language models (LMs) for a wide variety of applications and research topics. Prompt engineering skills help to better understand the capabilities and limitations of large language models (LLMs).
@@ -56,7 +58,7 @@ Prompt engineering is not just about designing and developing prompts. It encomp
 [^1]: The above quote is excerpted from https://www.promptingguide.ai/
 {{< /notice >}}
 
-Like any other artifact prompts may be outdated or "drift" which is why it is important to have systems in place to do:
+Like any other artifact prompts may be "outdated" or "drift" which is why it is important to have systems in place to do the:
 * _Experiment_ tracking of prompts
 * _Evaluating_ your prompts (either via the "_golden dataset_" approach, LLM-based _evals_ or both)
 * _Observability_ of how your prompts are being used
@@ -74,7 +76,7 @@ See one definition below for `Named Entity Recognition`:
 [^2]: The above quote is excerpted from https://paperswithcode.com/task/named-entity-recognition-ner
 {{< /notice >}}
 
-Below is an example of the **BIO** notation:
+Below is an example of the **BIO** notation, which is a common format used for NER:
 {{< highlight shell "linenos=inline, style=monokai" >}}
 Mac [B-PER]
 Doe [I-PER]   
@@ -85,7 +87,7 @@ at [O]
 Mcdonalds [B-LOC]
 {{< / highlight >}}
 
-However, the BIO notation does not make sense for all use cases. Let's say that if you are interested in extracting _food_ entities then _hamburger_ above might be a key entity or tag that you want to predict. You can add any labels you like for your NER task as long as you have labeled entities to use.
+However, the BIO notation does not make sense for all use cases. Let's say that if you are interested in extracting _food_ entities then _hamburger_ above might be a **key** entity or tag that you want to predict.
 
 Usually, a "typical" NER pipeline [^3] comprises the following steps:
 1. `tokenizer`: Turn text into *tokens*
@@ -101,10 +103,11 @@ Solving NER systems has previously been done by using:
 3. Deep-Learning systems
 4. Mix of (1) - (3).
 
-Where [spacy](https://spacy.io/) and Transformer architectures from e.g. [HuggingFace](https://huggingface.co/) such as *BERT*, *XLM-ROBERta* have been the go-to methods.
+Where [spacy](https://spacy.io/) and Transformer architectures from e.g. [HuggingFace](https://huggingface.co/) such as _BERT_, _XLM-ROBERta_ etc. have been the go-to methods or architectures.
 
-Before we start with prompt engineering let's create an example of where we want to employ this. 
+Before we start with prompt engineering let's set the stage with an example use case. 
 
+### Food Entities from recipes 
 In the following section we will assume the following:
 1. We are a food tech startup that provides and sells custom smart purchase lists to retailers from online food recipes.
 2. We want to extract the following type of entities: `FOOD`, `QUANTITY`, `UNIT`, `PHYSICAL_QUALITY`, `COLOR`
@@ -135,7 +138,7 @@ If needed, trim excess fat from the outside of the pork but you still want a lat
 ...
 {{< / highlight >}}
 
-## Technique #1 - Use `temperature 0.0`
+## Technique #1 - Use `temperature=0.0`
 LLMs are *non-deterministic* by nature and different generations of using e.g. chat completions APIs from e.g. `OpenAI` will return different responses. However, one way to mitigate this is to use the `temperature` parameter often provided in these types of APIs. In short, the *lower* the temperature, the more **deterministic** the results in the sense that the highest probable next token is always picked [^4]. Do notice that this is still not a guarantee for deterministic output. Rather the *best try effort* to always select the *most likely token* as model output.
 
 This is of course useful in a NER case where you would like the same or similar input to produce the same or similar output.
@@ -199,22 +202,35 @@ The food-related entities present in the recipe are as follows:
 These entities cover the main ingredients used for the Chashu pork recipe.
 {{< / highlight >}}
 
+You can also use the `Assistant` message to prompt with some examples:
+{{< highlight markdown "linenos=inline, style=monokai" >}}
+
+Assistant:
+Example:
+```json
+{
+  "food": "minced meat",
+  "quantity": 500
+  "unit": grams (g)
+  "physicalQuality": "minced",
+  "color": "brown"
+}
+```
+...
+{{< / highlight >}}
+
 {{< notice tip >}} 
-**Tip 3**: TBA
+**Tip 3**: Use clear instructions.
 {{< /notice >}}
 
-<TODO: Add improved prompt>
-
-## Technique #4 - Use `function` or `tools` API
-When we use `functions` or `tools` we prompt the model to provide input arguments for an actual function in a downstream manner. The functions will also be part of the system prompt. Many of the latest models have been fine-tuned to work with function calling and thus produce valid `JSON` output in that way. 
-
-In order to define a function we define a `jsonSchema` as below:
+## Technique #4 - Use `function` or `tools`
+When we use `functions` or `tools` we prompt the model to provide input arguments for an actual function in a downstream manner. The functions will also be part of the system prompt. Many of the latest models have been fine-tuned to work with function calling and thus produce valid `JSON` output in that way. To define a function we define a `jsonSchema` as below:
 
 {{< highlight json "linenos=inline, style=monokai" >}}
 
 {
     "name": "extract_food_entities",
-    "description": "You are a food AI assistant. Your task is to extract food entities from a recipe based on the json schema. You are to return the output as valid json.",
+    "description": "You are a food AI assistant. Your task is to extract food entities from a recipe based on the JSON schema. You are to return the output as valid JSON.",
     "parameters": {
       "type": "object",
       "properties": {
@@ -278,7 +294,7 @@ The example output of using the `extract_food_entities` below is:
 {{< /notice >}}
 
 ## Technique #5 - Use domain prompts 
-As seen above using the `jsonSchema` above gives us metadata in a structured format that we can use for downstream processing. However, there are some limitations in the number of characters you can set in the description for each `property` in the `jsonSchema`. One way to give further instructions to the LLM is to add `domain-specific` instruction in e.g. the `system` prompt:
+As seen above using the `jsonSchema` above gives us metadata in a structured format that we can use for downstream processing. However, there are some limitations in the number of characters you can set in the description for each `property` in the `jsonSchema`. One way to give further instructions to the LLM is to add `domain-specific` instructions to e.g. the `system` prompt:
 
 {{< highlight markdown "linenos=inline, style=monokai" >}}
 
@@ -337,7 +353,7 @@ Example output with this update prompt is shown below:
 Chain-of-Thought (CoT) is a prompting technique where each input question is followed by an intermediate reasoning step, that leads to the final answer. This shown to improve the the output from LLMs. There is also a slight variation of CoT called _Zero-Shot Chain-of-Thought_ where you introduce **“Let’s think step by step”** to guide the LLM's reasoning.
 {{< /notice >}}
 
-An update to the prompt now would be:
+An update to the prompt now using *Zero-Shot Chain-of-Thought* would be:
 
 {{< highlight markdown "linenos=inline, style=monokai" >}}
 
@@ -378,11 +394,93 @@ By adding **“Let’s think step by step”** we can see some slight improvemen
     }
 }
 {{< / highlight >}}
-Trimmed is a better `physicalQuality` used instead of `raw` for the pork belly as it is sliced and used as a topping e.g. ramen.
+Trimmed is likely a better `physicalQuality` to describe the pork belly, instead of `raw`. This as the pork belly is sliced and used as a topping e.g. a bowl of ramen.
+
+{{< notice tip >}} 
+**Tip 6**: `Chain-of-thought` may improve performance, especially for fields that need some calculation or reasoning steps.
+{{< /notice >}}
 
 ## Technique #7 - Use Prompt Chaining
-Exercitation non excepteur officia eu sed irure tempor ex laborum sed cupidatat mollit elit reprehenderit nostrud. Laboris voluptate minim eu lorem ad eu do sit culpa.
+{{< notice info >}} 
+To improve the reliability and performance of LLMs, one of the important prompting engineering techniques is to break tasks into subtasks. Once those subtasks have been identified, the LLM is prompted with a subtask and then its response is used as input to another prompt. This is what's referred to as prompt chaining where a task is split into subtasks with the idea to create a chain of prompt operations.
+— <cite>Prompt Engineering Guide[^6]</cite>
 
+[^6]: The above quote is excerpted from https://www.promptingguide.ai/techniques/prompt_chaining
+{{< /notice >}}
+
+*Prompt Chaining* is somewhat similar to CoT here with the idea of breaking down the problem into sub-problems or tasks. However, the main difference here is that one prompt outputs its response from a previous prompt to the next prompt as refined context.
+
+In our recipe example, we might construct a prompt looking like the below:
+
+{{< highlight python "linenos=inline, style=monokai" >}}
+CONTEXT_PROMPT = """
+You are a food AI assistant who is an expert in natural language processing
+and especially named entity recognition. The entities we are interested in are: "food", "quantity", "unit", "physicalQuality" and "color". 
+
+Your task is to extract the entity, the value of the entity and the reasoning, 
+for why the extracted value is the correct value. 
+If you cannot extract the entity add "N/A".
+
+Make sure to output the results according to the output format below.
+
+<Food-Metadata>:
+"<metadata>":
+- Entity: // the actual entity i.e. pork, onions etc
+- Value: // Value of the metadata field
+- Reasoning: // Reasoning for why the entity is correct.
+
+Let's think step-by-step.
+"""
+{{< / highlight >}}
+
+The output from the first prompt is:
+{{< highlight markdown "linenos=inline, style=monokai" >}}
+"pork":
+- Entity: food
+- Value: pork belly
+- Reasoning: The text mentions preparing pork belly for Japanese dishes such as ramen, and the recipe specifically calls for 2 lb of pork belly.
+
+"green onions":
+- Entity: food
+- Value: green onions
+- Reasoning: The text mentions using 2 green onions and specifies that 3 should be used if they are small.
+
+"ginger":
+- Entity: food
+- Value: ginger
+- Reasoning: The recipe specifies using 1 inch of fresh ginger.
+
+"garlic":
+- Entity: food
+- Value: garlic
+- Reasoning: The recipe specifies using 2 cloves of garlic.
+
+"sake":
+- Entity: food
+- Value: sake
+- Reasoning: The recipe calls for ⅔ cup of sake.
+
+"soy sauce":
+- Entity: food
+- Value: soy sauce
+- Reasoning: The recipe calls for ⅔ cup of soy sauce.
+
+"mirin":
+- Entity: food
+- Value: mirin
+- Reasoning: The recipe calls for ¼ cup of mirin.
+
+"sugar":
+- Entity: food
+- Value: sugar
+- Reasoning: The recipe calls for ½ cup of sugar.
+
+"water":
+- Entity: food
+- Value: water
+- Reasoning: The recipe specifies using 2 cups of water.
+{{< / highlight >}}
+We then use the output from the prompt above as input to our `extract_food_entities` prompt from before. This approach may be helpful when you have entities that need to be calculated with some reasoning around them or they may not be in the exact format that you have in your JSON schema.
 
 ## Closing Remarks
-Exercitation non excepteur officia eu sed irure tempor ex laborum sed cupidatat mollit elit reprehenderit nostrud. Laboris voluptate minim eu lorem ad eu do sit culpa.
+In this post, we have been walking through some useful prompt-engineering techniques that might be helpful when you deal with Named Entity Recognition (NER) using LLMs such as OpenAI. Depending on your use-case one or several of these techniques may help improve your NER solution. However, writing clear instructions, using CoT and or prompt chaining together with `tools` or `functions` tend to improve the NER extraction.
