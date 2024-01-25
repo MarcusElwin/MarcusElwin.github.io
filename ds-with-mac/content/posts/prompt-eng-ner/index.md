@@ -31,7 +31,7 @@ newsletter: false
 disable_comments: false
 ---
 
-**2023** was the year of *exploration*, *testing* and *proof-of-concepts* or deployment of smaller LLM-powered workflows/use cases for many organizations. Whilst 2024 will likely be the year where we will see even more production systems leveraging LLMs. Compared to a traditional ML system where data (examples, labels), model and weights are artifacts, prompts are the **main** artifacts. Prompts and prompt engineering are used for driving a certain behavior of an assistant or agent.
+**2023** was the year of *exploration*, *testing* and *proof-of-concepts* or deployment of smaller LLM-powered workflows/use cases for many organizations. Whilst 2024 will likely be the year where we will see even more production systems leveraging LLMs. Compared to a traditional ML system where data (examples, labels), model and weights are some of the main artifacts, prompts are instead the **main**** artifacts. Prompts and prompt engineering are fundamental in driving a certain behavior of an assistant or agent, for your use case.
 
 Therefore many of the large players as well as academia have provided guides on how to prompt LLMs efficiently:
 1. :computer: [OpenAI Prompt Engineering](https://platform.openai.com/docs/guides/prompt-engineering)
