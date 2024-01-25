@@ -8,7 +8,7 @@ author: Marcus Elwin
 
 draft: false
 date: 2024-01-21T16:23:42+01:00
-lastmod: 
+lastmod: 2024-01-25T16:23:42+01:00
 expiryDate: 
 publishDate: 
 
@@ -31,7 +31,7 @@ newsletter: false
 disable_comments: false
 ---
 
-**2023** was the year of *exploration*, *testing* and *proof-of-concepts* or deployment of smaller LLM-powered workflows/use cases for many organizations. Whilst 2024 will likely be the year where we will see even more production systems leveraging LLMs. Compared to a traditional ML system where data (examples, labels), model and weights are artifacts, prompts are the **main** artifacts. Prompts and prompt engineering are used for driving a certain behavior of an assistant or agent.
+**2023** was the year of *exploration*, *testing* and *proof-of-concepts* or deployment of smaller LLM-powered workflows/use cases for many organizations. Whilst 2024 will likely be the year where we will see even more production systems leveraging LLMs. Compared to a traditional ML system where data (examples, labels), model and weights are some of the main artifacts, prompts are instead the **main**** artifacts. Prompts and prompt engineering are fundamental in driving a certain behavior of an assistant or agent, for your use case.
 
 Therefore many of the large players as well as academia have provided guides on how to prompt LLMs efficiently:
 1. :computer: [OpenAI Prompt Engineering](https://platform.openai.com/docs/guides/prompt-engineering)
@@ -50,7 +50,7 @@ Prompt Engineering sometimes feels more like an *art* compared to *science* but 
 One definition of `Prompt Engineering` is shown below:
 
 {{< notice info >}} 
-Prompt engineering is a relatively new discipline for developing and optimizing prompts to efficiently use language models (LMs) for a wide variety of applications and research topics. Prompt engineering skills help to better understand the capabilities and limitations of large language models (LLMs).
+**Prompt engineering** is a relatively new discipline for developing and optimizing prompts to efficiently use language models (LMs) for a wide variety of applications and research topics. Prompt engineering skills help to better understand the capabilities and limitations of large language models (LLMs).
 
 Prompt engineering is not just about designing and developing prompts. It encompasses a wide range of skills and techniques that are useful for interacting and developing with LLMs. It's an important skill to interface, build with, and understand the capabilities of LLMs. You can use prompt engineering to improve the safety of LLMs and build new capabilities like augmenting LLMs with domain knowledge and external tools.
 — <cite>Prompt Engineering Guide[^1]</cite>
@@ -350,7 +350,7 @@ Example output with this update prompt is shown below:
 
 ## Technique #6 - Use Chain-of-Thought
 {{< notice info >}} 
-Chain-of-Thought (CoT) is a prompting technique where each input question is followed by an intermediate reasoning step, that leads to the final answer. This shown to improve the the output from LLMs. There is also a slight variation of CoT called _Zero-Shot Chain-of-Thought_ where you introduce **“Let’s think step by step”** to guide the LLM's reasoning.
+**Chain-of-Thought** (CoT) is a prompting technique where each input question is followed by an intermediate reasoning step, that leads to the final answer. This shown to improve the the output from LLMs. There is also a slight variation of CoT called _Zero-Shot Chain-of-Thought_ where you introduce **“Let’s think step by step”** to guide the LLM's reasoning.
 {{< /notice >}}
 
 An update to the prompt now using *Zero-Shot Chain-of-Thought* would be:
