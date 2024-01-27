@@ -8,7 +8,7 @@ author: Marcus Elwin
 
 draft: false
 date: 2024-01-21T16:23:42+01:00
-lastmod: 2024-01-25T16:23:42+01:00
+lastmod: 2024-01-27T16:23:42+01:00
 expiryDate: 
 publishDate: 
 
@@ -31,7 +31,7 @@ newsletter: false
 disable_comments: false
 ---
 
-**2023** was the year of *exploration*, *testing* and *proof-of-concepts* or deployment of smaller LLM-powered workflows/use cases for many organizations. Whilst 2024 will likely be the year where we will see even more production systems leveraging LLMs. Compared to a traditional ML system where data (examples, labels), model and weights are some of the main artifacts, prompts are instead the **main**** artifacts. Prompts and prompt engineering are fundamental in driving a certain behavior of an assistant or agent, for your use case.
+**2023** was the year of *exploration*, *testing* and *proof-of-concepts* or deployment of smaller LLM-powered workflows/use cases for many organizations. Whilst 2024 will likely be the year where we will see even more production systems leveraging LLMs. Compared to a traditional ML system where data (examples, labels), model and weights are some of the main artifacts, prompts are instead the **main** artifacts. Prompts and prompt engineering are fundamental in driving a certain behavior of an assistant or agent, for your use case.
 
 Therefore many of the large players as well as academia have provided guides on how to prompt LLMs efficiently:
 1. :computer: [OpenAI Prompt Engineering](https://platform.openai.com/docs/guides/prompt-engineering)
@@ -223,8 +223,10 @@ Example:
 **Tip 3**: Use clear instructions.
 {{< /notice >}}
 
-## Technique #4 - Use `function` or `tools`
-When we use `functions` or `tools` we prompt the model to provide input arguments for an actual function in a downstream manner. The functions will also be part of the system prompt. Many of the latest models have been fine-tuned to work with function calling and thus produce valid `JSON` output in that way. To define a function we define a `jsonSchema` as below:
+## Technique #4 - Use `functions` or `tools`
+When we use `functions` or `tools` we prompt the model to provide input **arguments** for an actual function in a downstream manner. This is similar to what is mentioned in section 4.2 here [^6] You can use these arguments as they are (as they will be valid `JSON`) or do some further processing by doing the function calling in your logic. One example could be that we want to trigger certain actions or do certain formatting based on the function arguments.
+
+The functions will also be part of the system prompt. Many of the latest models have been fine-tuned to work with function calling and thus produce valid `JSON` output in that way. To define a function we define a `jsonSchema` as below:
 
 {{< highlight json "linenos=inline, style=monokai" >}}
 
@@ -288,6 +290,8 @@ The example output of using the `extract_food_entities` below is:
     }
 }
 {{< / highlight >}}
+
+[^6]: OpenAI cookbook for NER: https://cookbook.openai.com/examples/named_entity_recognition_to_enrich_text
 
 {{< notice tip >}} 
 **Tip 4**: Use `tools` or `function` calling with a `jsonSchema` to extract wanted metadata.
@@ -403,9 +407,9 @@ Trimmed is likely a better `physicalQuality` to describe the pork belly, instead
 ## Technique #7 - Use Prompt Chaining
 {{< notice info >}} 
 To improve the reliability and performance of LLMs, one of the important prompting engineering techniques is to break tasks into subtasks. Once those subtasks have been identified, the LLM is prompted with a subtask and then its response is used as input to another prompt. This is what's referred to as prompt chaining where a task is split into subtasks with the idea to create a chain of prompt operations.
-— <cite>Prompt Engineering Guide[^6]</cite>
+— <cite>Prompt Engineering Guide[^7]</cite>
 
-[^6]: The above quote is excerpted from https://www.promptingguide.ai/techniques/prompt_chaining
+[^7]: The above quote is excerpted from https://www.promptingguide.ai/techniques/prompt_chaining
 {{< /notice >}}
 
 *Prompt Chaining* is somewhat similar to CoT here with the idea of breaking down the problem into sub-problems or tasks. However, the main difference here is that one prompt outputs its response from a previous prompt to the next prompt as refined context.
@@ -487,4 +491,6 @@ We then use the output from the prompt above as input to our `extract_food_entit
 {{< /notice >}}
 
 ## Closing Remarks
-In this post, we have been walking through some useful prompt-engineering techniques that might be helpful when you deal with Named Entity Recognition (NER) using LLMs such as OpenAI. Depending on your use-case one or several of these techniques may help improve your NER solution. However, writing clear instructions, using CoT and or prompt chaining together with `tools` or `functions` tend to improve the NER extraction.
+In this post, we have been walking through some useful prompt-engineering techniques that might be helpful when you deal with Named Entity Recognition (NER) using LLMs such as OpenAI. 
+
+Depending on your use-case one or several of these techniques may help improve your NER solution. However, writing clear instructions, using CoT and or prompt chaining together with `tools` or `functions` tend to improve the NER extraction.
