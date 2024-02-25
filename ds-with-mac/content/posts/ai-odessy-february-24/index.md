@@ -95,7 +95,7 @@ The Gemma release included the following:
   
 Looking at the technical paper _Gemma_ in its base form seems to fair well against _Mistral_ and _LLaMa_ in terms of QA, Reasoning, Math / Science and Coding:
 
-![Results Gemma](/res_gemma.png "Language understanding and generation performance of Gemma for different capabilities VS other open source models LLaMa and Mistral. The image was sourced from Gemma Techincal Report.")
+![Results Gemma](/res_gemma.png "Language understanding and generation performance of Gemma for different capabilities VS other open source models LLaMa and Mistral. The image was sourced from Gemma Technical Report.")
 
 Also looking at the [LLM Leaderboard](https://huggingface.co/blog/gemma) Gemma is ranking highly in comparison to other 7B models. While be interesting to see when we start to see some more fine-tuned versions of Gemma.
 
@@ -112,7 +112,7 @@ gemma_lm.generate(What is the meaning of life", max_length=512)
 
 ### Additional resources :computer:
 1. [Gemma Announcement](https://blog.google/technology/developers/gemma-open-models/)
-2. [Gemma Techincal Report](https://storage.googleapis.com/deepmind-media/gemma/gemma-report.pdf)
+2. [Gemma Technical Report](https://storage.googleapis.com/deepmind-media/gemma/gemma-report.pdf)
 3. [Welcome Gemma - Google's New Open LLM](https://huggingface.co/blog/gemma)
 4. [Introducing Gemma models in Keras](https://developers.googleblog.com/2024/02/gemma-models-in-keras.html)
 
@@ -139,7 +139,7 @@ According to OpenAI:
 
 ### Additional resources :computer:
 1. [SORA](https://openai.com/sora)
-2. [SORA Techincal Report](https://openai.com/research/video-generation-models-as-world-simulators)
+2. [SORA Technical Report](https://openai.com/research/video-generation-models-as-world-simulators)
 
 ## 4. Predibase announces LoRA Land
 ### What :dart:
