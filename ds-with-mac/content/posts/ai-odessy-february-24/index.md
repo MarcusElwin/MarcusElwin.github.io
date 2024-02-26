@@ -7,8 +7,8 @@ slug: ai-odyssey-february-24
 author: Marcus Elwin
 
 draft: false
-date: 2024-02-24T14:40:39+01:00
-lastmod: 
+date: 2024-02-25T14:40:39+01:00
+lastmod: 2024-02-26T14:40:39+01:00
 expiryDate: 
 publishDate: 
 
@@ -47,7 +47,7 @@ On February, 15th, 2024 Google announced the release of [Gemini 1.5](https://blo
 * Improved _In-Context_ learning skills from long prompts, without needing fine-tuning.
 * With a standard context window of **128,000** tokens, that can be extended to **1** million tokens. 
 
-Let that sink in a bit **1 million** tokens which is roughly **700,000+**. A "regular" book :book: has somewhere between _250-300_ words per page. This would mean that you can use a book of between **2300+** pages as context to the Gemini 1.5 Pro model. 
+Let that sink in a bit **1 million** tokens which is roughly **700,000+** pages. A "regular" book :book: has somewhere between _250-300_ words per page. This would mean that you can use a book of between **2300+** pages as context to the Gemini 1.5 Pro model. 
 
 For instance, you could feed in the entire _Lord of the Rings_ and _The Count of Monte Cristo_ at the same time as both of these books are roughly **1200** pages. 
 
@@ -66,7 +66,7 @@ Finally, in terms of performance, the paper also mentions:
 > that 1.5 Pro is able to maintain **near-perfect recall** on multi-modal versions of needle-in-a-haystack
 > (see Section 4.2.1.2) and is able to effectively use its context to retrieve and reason over large amounts of data
 
-I always get a bit _skeptical_ (I guess it is the DS in me) when I hear that metrics are close to 100% or near-perfect as this normally means that you are overfitting or doing something wrong. However, it is still very impressive in comparison to GPT-4V on the same dataset. While be exciting to see more benchmarks on this going forward.
+I always get a bit _skeptical_ (I guess it is the DS in me) when I hear that metrics are close to 100% or near-perfect as this normally means that you are overfitting or doing something wrong. However, it is still very impressive in comparison to `GPT-4V` on the same dataset. While be exciting to see more benchmarks on this going forward.
 
 [^1]: Similar to the Mixtral model launched last year: https://mistral.ai/news/mixtral-of-experts/
 
@@ -99,7 +99,7 @@ Looking at the technical paper _Gemma_ in its base form seems to fair well again
 
 Also looking at the [LLM Leaderboard](https://huggingface.co/blog/gemma) Gemma is ranking highly in comparison to other 7B models. While be interesting to see when we start to see some more fine-tuned versions of Gemma.
 
-Finally, it is also cool to see the quick integration with the Keras library as well where it is as simple as the below to start testing Gemma:
+Finally, it is also cool to see the quick integration with the `Keras` library as well where it is as simple as the below to start testing Gemma:
 {{< highlight python "linenos=inline, style=monokai" >}}
 # load model
 gemma_lm = keras_nlp.models.GemmaCausalLM.from_preset("gemma_2b_en")
@@ -154,8 +154,8 @@ Predibase mentions the following, regarding LoRA [^3]:
 ![LoRA land benchmarks vs GPT-4](/lora_land_bench.png "LLM Benchmarks: 25 fine-tuned Mistral-7b adapters that outperform GPT-4. Image from Predibase.")
 
 ### Why it interests me :eyes:
-* You should not sleep on fine-tuning, often a fine-tuned task-specific model can be a more generalized model.
-* A more cost-efficient way of serving custom LLMs using Predibase, requiring less computing and giving you more control.
+* You should not sleep on fine-tuning, often a fine-tuned task-specific model can _beat_ a more generalized model, on domain-specific tasks.
+* A more _cost-efficient_ way of serving custom LLMs using Predibase, requiring less computing and giving you more control.
 
 [^3]: Low-rank Adapter (LoRA) finetuning is a method that reduces memory
 requirements by using a small set of trainable parameters, often termed adapters, while not updating
@@ -171,7 +171,7 @@ the full model parameters that remain fixed.
 On February 22nd, 2024 Stability AI announced that they have released (in an early preview) "Stable Diffusion 3". Like SORA this is a text-to-image model.
 
 What is mentioned in the release:
-* Range of models from 800M to 8B parameters
+* Range of models from **800M** to **8B** parameters
 * Combination of diffusion transform architecture and flow matching 
 
 No technical report is out yet, but will be interesting to dive deeper when it gets released. 
@@ -310,7 +310,7 @@ According to _Groq_ their chip overcomes the following challenges, for LLMs:
 2. Memory bandwidth
 
 When doing a small test it is fast:
-![Groq and the meaning of life.](/groq.png "Testing Qroq chat interface with an impressive 500+ tokens/seconds. Served using LPUs.")
+![Groq and the meaning of life.](/groq.png "Testing Groq chat interface with an impressive 500+ tokens/seconds. Served using LPUs.")
 
 I think it is very interesting to see other more specialized chip providers show up, such as Groq. However, there are also other providers such as [graphcore](https://www.graphcore.ai/) offering IPUs [^5].
 
