@@ -18,3 +18,8 @@ hugo.linux
 
 ### System
 .DS_Store
+
+### Data
+.md
+.json
+.csv
