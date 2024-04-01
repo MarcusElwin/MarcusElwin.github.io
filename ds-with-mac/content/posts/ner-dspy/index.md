@@ -45,7 +45,7 @@ To get a good overview of `DSPy` see some of the references below:
 In this post, we will try to use `DSPy` to extract metadata data from recipes. For a recap of our previous approach see e.g. this [post](https://dswithmac.com/posts/prompt-eng-ner/#food-entities-from-recipes).
 
 ## DSPy - Declarative Self-improving Language Programs
-`DSPy` or Declarative Self-improving Language Programs* was first introduced in the paper in (2):
+`DSPy` or *Declarative Self-improving Language Programs* was first introduced in the paper in (2):
 
 {{< notice info >}} 
 `DSPy` is a framework for algorithmically **optimizing** LM prompts and weights, especially when LMs are used one or more times within a pipeline.
@@ -251,7 +251,7 @@ trainset = [
 [^4]: For this you can use [dspy.Example](https://dspy-docs.vercel.app/docs/building-blocks/data)
 
 ### Signatures
-The next step is to create the `dspy.Signature` objects, where we need to specify an `InputField``(...`)` and `OutPutField(...)`. To recap what a `Signature` is:
+The next step is to create the `dspy.Signature` objects, where we need to specify an `InputField(...)` and `OutPutField(...)`. To recap what a `Signature` is:
 
 {{< notice info >}} 
 A **signature** is a declarative specification of the input/output behavior of a DSPy module. Signatures allow you to tell the LM what it needs to do, rather than specify how we should ask the LM to do it.
