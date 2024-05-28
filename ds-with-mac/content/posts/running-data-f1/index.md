@@ -64,11 +64,11 @@ See the table above for the **9** most common roles in a Formula 1 team and depe
 
 #### Overview of what each person is in charge of:
 
-* **Team Principal**: The directors of the team, some may come from car manufactors or other are from private companies from e.g. the team owners.
+* **Team Principal**: The directors of the team, some may come from car manufacturers or other are from private companies from e.g. the team owners.
 
 * **F1 Drivers**: The stars of the team driving the F1 cars. Normally there are 2 main drivers,  1 reserve driver and 1 simulation driver. The two main drivers tend to be bitter foes.
 
-* **Assistants**: They are in charge of helping and organzing events, calendars and procedures.
+* **Assistants**: They are in charge of helping and organizing events, calendars and procedures.
 
 * **Managers**: In charge of different groups and areas, leading teams, supervising and guiding.
 
