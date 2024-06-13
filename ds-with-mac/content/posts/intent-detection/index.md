@@ -104,10 +104,10 @@ const zDetectFoodIntentResponse = z.object({
     foodIntent: z
       .array(
         z.object({
-            inputType: z.nativeEnum(FoodContextType))
+            foodContextType: z.nativeEnum(FoodContextType))
             .describe('Type of context the user is in'),
-            intentType: z.nativeEnum(FoodIntentType))
-            .describe('Predicte food related intent'),
+            foodIntentType: z.nativeEnum(FoodIntentType))
+            .describe('Predict food related intent'),
             reasoning: z.string()
             .describe('Reasoning around the predicted intent')
         })
@@ -120,7 +120,7 @@ type FoodIntentDetectionResponse = z.infer<typeof zDetectFoodIntentResponse>;
 
 Many modern LLMs have no support tool calling / structured output out-of-the-box, and using orchestrating libraries such as `langchain` makes it very easy to get started. Langchain released fairly recent updates to how to do structured output extraction and function calling across several different LLM providers. See more about it [here](https://blog.langchain.dev/tool-calling-with-langchain/).
 
-To continue, next step is to create our `prompt` and build or `chain` of one or several `LLM` calls. If you want to see some tips and tricks on how to do multiple LLM calls for data extraction tasks see my other [blogpost](https://dswithmac.com/posts/prompt-eng-ner/). And if you like me are a fan of `DSPy` check my other [post](https://dswithmac.com/posts/ner-dspy/). Anyhow, on the initial starting point of our prompt:
+To continue, the next step is to create our `prompt` and build or `chain` of one or several `LLM` calls. If you want to see some tips and tricks on how to do multiple LLM calls for data extraction tasks see my other [blogpost](https://dswithmac.com/posts/prompt-eng-ner/). And if you like me are a fan of `DSPy` check my other [post](https://dswithmac.com/posts/ner-dspy/). Anyhow, on the initial starting point of our prompt:
 
 {{< highlight typescript "linenos=inline, style=monokailight" >}}
 export const FoodIntentDetectionPromptTemplate = `
@@ -147,7 +147,7 @@ Make sure to follow the instructions.
 
 As prompt engineering is still more of an art than a science (if you are not using frameworks such as `DSPy`) you likely need to refine a prompt such as the above for your use case. Anyhow, for this example, this is good enough and let's proceed with building our chain.
 
-First we define a helper class to keep track of our chat messages:
+First, we define a helper class to keep track of our chat messages:
 
 {{< highlight typescript "linenos=inline, style=monokailight" >}}
 import { ChatPromptTemplate } from '@langchain/core/prompts'
@@ -218,3 +218,47 @@ async predictIntent(messages: Messages)
 
 }
 {{< / highlight >}}
+
+Not too hard right? Using this function we might get output such as the below for different queries:
+
+Query 1:
+> "Can give me a good dinner recommendation that is fairly quick and easy, preferably japanese?"
+
+Output 1:
+{{< highlight json "linenos=inline, style=monokailight" >}}
+{
+    "foodIntent": [
+        {
+            "foodContextType": "GENERAL",
+            "foodIntentType": "GENERAL_RECOMMENDATION",
+            "reasoning": "The user is asking for a recommendation of Japanese food that is easy and quick. Due to this, the predicted intent is GENERAL_RECOMMENDATION."
+        }
+    ]
+}
+
+{{< / highlight >}}
+
+Query 2:
+> "This recipe is great, but I would like to make it vegetarian, and also use the imperial system instead of the metrics system for the ingredients"
+
+Output 2:
+{{< highlight json "linenos=inline, style=monokailight" >}}
+{
+    "foodIntent": [
+        {
+            "foodContextType": "RECIPE",
+            "foodIntentType": "RECIPE_QA",
+            "reasoning": "The user ..."
+        },
+        {
+            "foodContextType": "RECIPE",
+            "foodIntentType": "RECIPE_TRANSLATE",
+            "reasoning": "The user ..."
+        },
+    ]
+}
+
+{{< / highlight >}}
+
+
+## Closing remarks
