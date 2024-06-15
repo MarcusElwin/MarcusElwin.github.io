@@ -194,7 +194,7 @@ const zDetectFoodIntentResponse = z.object({
       )
 });
 
-^3: This is somewhat similar to `Pydantic` in Python.
+[^3]: This is somewhat similar to `Pydantic` in Python.
 
 /* Infer type */
 type FoodIntentDetectionResponse = z.infer<typeof zDetectFoodIntentResponse>;
