@@ -122,12 +122,12 @@ Now that we know what `Ìntent Detection` is and why it is useful, let's look at
 
 In this example, we will operate a fictional recipe chatbot where people can in a QA fashion ask questions about a recipe and also get recipe recommendations. Our end-users, can either chat in the context of a `recipe` or a more general `QA` context. 
 
-This means that we have two distinct `ContextTypes` to consider based on the user's actions:
+This means that we have two distinct `FoodContextTypes` to consider based on the user's actions:
 1. `RECIPE`: queries in the context of a recipe 
 2. `GENERAL`: more general queries not strictly connected to a specific recipe.
 
 
-After talking with our product team and some clients, we understand that to a start we need to be able to detect the following `IntentTypes`:
+After talking with our product team and some clients, we understand that to a start we need to be able to detect the following `FoodIntentTypes`:
 1. `RECIPE_QA`: Question and answer about a recipe 
 2. `RECIPE_SUGGEST`: Suggestions or changes to a recipe
 3. `RECIPE_TRANSLATE`: Translate a recipe, or parts of a recipe in some way or form
@@ -167,12 +167,14 @@ As `intentDetection` is a `classification` problem we want to use an LLM to pred
 - `userQuery`: the actual user question or queries.
 
 `Intent` can also be of multiple meanings i.e. only allowing or deducing a single intent might be wrong. For instance, look at the query below:
-> "Please recommended me a french cooking recipe with instructions in french":
-Some intent we can deduce based on the query is the following:
-1. `GENERAL_RECOMMENDATION`: the user clearly wants to cook :fr: 
-2. `RECIPE_TRANSLATE`: the user clearly wants to cook French food in French:fr: :fr:
 
-To model this we want to use `zod` (which is somewhat similar to `Pydantic` in Python). Luckily for us, many LLM(s) are good at `functionCalling` and extracting `structuredOutput` based on a provided schema.
+> "Please recommended me a french cooking recipe with instructions in french"
+
+The intent we can deduce based on the query above is the following:
+1. `GENERAL_RECOMMENDATION`: the user wants to cook :fr: 
+2. `RECIPE_TRANSLATE`: the user wants to cook French food in French:fr: :fr:
+
+To model this we want to use <cite>`zod`[^3]</cite>. Luckily for us, many LLM(s) are good at `functionCalling` and extracting `structuredOutput` based on a provided schema.
 
 A `zod` object for our task could look like the below:
 {{< highlight typescript "linenos=inline, style=monokailight" >}}
@@ -192,13 +194,17 @@ const zDetectFoodIntentResponse = z.object({
       )
 });
 
+^3: This is somewhat similar to `Pydantic` in Python.
+
 /* Infer type */
 type FoodIntentDetectionResponse = z.infer<typeof zDetectFoodIntentResponse>;
 {{< / highlight >}}
 
-Many modern LLMs have no support tool calling / structured output out-of-the-box, and using orchestrating libraries such as `langchain` makes it very easy to get started. Langchain released fairly recent updates to how to do structured output extraction and function calling across several different LLM providers. See more about it [here](https://blog.langchain.dev/tool-calling-with-langchain/).
+Many modern LLMs support tool calling / structured output *out-of-the-box*, and using orchestrating libraries such as `langchain` makes it very easy to get started. Langchain released fairly recent updates to how to do structured output extraction and function calling across several different LLM providers. See more about it [here](https://blog.langchain.dev/tool-calling-with-langchain/).
 
-To continue, the next step is to create our `prompt` and build or `chain` of one or several `LLM` calls. If you want to see some tips and tricks on how to do multiple LLM calls for data extraction tasks see my other [blogpost](https://dswithmac.com/posts/prompt-eng-ner/). And if you like me are a fan of `DSPy` check my other [post](https://dswithmac.com/posts/ner-dspy/). Anyhow, on the initial starting point of our prompt:
+To continue, the next step is to create our `prompt` and build or `chain` of one or several `LLM` calls. If you want to see some tips and tricks on how to do multiple LLM calls for data extraction tasks see my other [blogpost](https://dswithmac.com/posts/prompt-eng-ner/). And if you like me are a fan of `DSPy` check my other [post](https://dswithmac.com/posts/ner-dspy/). 
+
+Anyhow, see below for the initial starting point of our prompt:
 
 {{< highlight typescript "linenos=inline, style=monokailight" >}}
 export const FoodIntentDetectionPromptTemplate = `
@@ -268,7 +274,7 @@ async predictIntent(messages: Messages)
     // build chain
     const llm = new ChatOpenAI({
         temperature: 0,
-        modelName: 'gpt-3.5-turbo',
+        modelName: 'gpt-4o',
         openAIApiKey: process.env.apiKey
 
     });
