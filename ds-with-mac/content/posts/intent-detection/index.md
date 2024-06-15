@@ -1,6 +1,6 @@
 ---
-title: Intent Detection
-seo_title: Intent Detection
+title: Intent Detection using LLMs
+seo_title: Intent Detection using LLM
 summary: 
 description: Learn more about Intent Detection and how we can predict user intent using Langchain and LLMs.
 slug: intent-detection
@@ -33,18 +33,96 @@ newsletter: true
 disable_comments: false
 ---
 
-Ex do est exercitation minim ullamco irure ex labore nostrud sit ea reprehenderit. Velit dolor quis est quis cupidatat consectetur exercitation commodo sed reprehenderit voluptate anim lorem exercitation mollit sint magna minim. Commodo occaecat magna consequat sit est duis tempor ut aliquip incididunt tempor sit nostrud. Ipsum aliqua nisi nisi ipsum aliquip sed quis laboris occaecat ipsum consectetur culpa dolore ad aliqua ullamco.
+In today’s digital landscape, product teams are increasingly incorporating AI-driven features powered by *Large Language Models (LLMs)*. These advanced capabilities enhance various system components, including search, question-answering, and data extraction. 
+
+However, a crucial preliminary step in delivering the right feature at the right time is accurately *routing* and interpreting user *actions*. Understanding user intent is therefore fundamental to the success of any LLM and Retrieval-Augmented Generation (RAG) based solution.
+
+In this blog post, we will delve into how LLMs :robot: can be utilized to effectively detect and interpret user intent from a diverse range of queries.
 
 ## What is intent detection and why does it matter?
-__TODO__
+**Intent Detection** or *intent recognition* is an NLP technique used to identify the purpose or goal behind a user's query. Historically, this type of classification problem has been very important in <cite>search and recommendation engines [^1]</cite>.
+
+Some key aspects of intent detection include:
+- **Natural Language Understanding**: i.e. understanding the *meaning* behind what a user is saying.
+- **Context Analysis**: i.e. considering the context in which the user query is in to accurately detect the intent. The context here could be a document, a part of a document, in a chat etc.
+- **Classification**: i.e. assigning pre-defined labels or categories to a user's input and predicted intent.
+
+As you can imagine this is a crucial step for an LLM-based system using e.g. RAG for various reasons such as:
+- **Improving the user experience**: by understanding users we can *tailor* responses and actions to meet individual needs. But also improve the efficiency and relevancy of the responses to the user's query by *personalization*.
+- **Automation**: knowing or predicting the intent can lead to the automation of certain pre-defined routines or tasks based on the user's query.
+- **Feature Activation**: intent detection can be used to *route* the user to various parts of our system based on the predicted intent and thus incorporate *context* to respond to user queries promptly.
+
+You may have heard about <cite>_semantic routing_[^2]</cite>, which is an adjacent concept. TLDR; use intent detection to route your users to relevant features or parts of your system to provide them with a tailored and timely experience.
+
+[^1]: [Papers With Code, Intent Detection](https://paperswithcode.com/task/intent-detection)
+[^2]: [Langchain, Route Logic Based on Input](https://python.langchain.com/v0.1/docs/expression_language/how_to/routing/)
 
 ## Intent Detection Method(s)
-__TODO__
+Now that we know what *intent detection* is, what it can be used for and why it is important.
+
+Let's delve a bit further into various methods for detecting intent:
+
+{{<mermaid>}}
+graph LR
+    A[Intent Detection Methods]
+
+    A --> B[Rule-based Methods]
+    B --> B1[Predefined Rules]
+    B --> B2[Keyword Matching]
+
+    A --> C[Traditional NLP Methods]
+    C --> C1[Bag-of-Words]
+    C --> C2[TF-IDF]
+
+    A --> D[Classification Models]
+    D --> D1[Naive Bayes]
+    D --> D2[SVM]
+    D --> D3[Random Forests]
+
+    A --> G[Sequence Models]
+    G --> G1[RNN]
+    G --> G2[LSTM]
+    G --> G3[GRU]
+
+    A --> E[Transformer-based Methods]
+    E --> E1[BERT]
+    E --> E2[GPT]
+    E --> E3[SetFit]
+    E --> E4[FastFit]
+
+    A --> F[Large Language Models]
+    F --> F1[GPT-4o]
+    F --> F2[Haiku]
+    F --> F3[Mistral Large]
+{{</mermaid>}}
+
+A rough classification of these various methods is the following:
+- Rule-based
+- Traditional NLP methods
+- Classification models 
+- Sequence models
+- Transformer-based models
+- Large Language models
+
+We will not look into all the details of these various methods. If you want to learn more, numerous great sources are available online for each type of method/algorithm mentioned.
+
+However, see the table below, with some pros and cons of these various methods:
+ 
+| **Method**                  | **Pros**                                                        | **Cons**                                                        |
+|-----------------------------|-----------------------------------------------------------------|-----------------------------------------------------------------|
+| **Rule-based Methods**      | - Simple to implement and interpret <br> - Easy to maintain for small sets of rules | - Limited flexibility and scalability <br> - Requires manual updates for new intents and vocabulary |
+| **Traditional NLP Methods** (Bag-of-Words, TF-IDF) | - Simple and effective for basic text classification <br> - Quick and computationally inexpensive | - Ignores word order and context <br> - Can lead to loss of meaning |
+| **Classification Models** (Naive Bayes, SVM, Random Forests) | - Generally more accurate than rule-based systems <br> - Can handle a variety of inputs | - Requires feature engineering <br> - May not capture complex linguistic nuances |
+| **Sequence Models** (RNN, LSTM, GRU) | - Effective for capturing context and handling long sequences <br> - Good at modeling temporal dependencies in text | - Computationally intensive <br> - Requires large datasets |
+| **Transformer-based Methods** (BERT, GPT, SetFit, FastFit) | - State-of-the-art performance in many NLP tasks <br> - Capable of understanding complex context and nuances | - Requires significant computational power <br> - Needs substantial training data |
+| **Large Language Models** (GPT-4o, Haiku, Mistral Large) | - High accuracy and versatility in various applications <br> - Can handle a wide range of tasks without extensive retraining | - Very computationally expensive <br> - Potential issues with bias and interpretability |            |
 
 ## Intent Detection Using LLM(s)
-Now that we know what `Ìntent Detection` is and why it is useful, let's look at a real-world example of how you could `detect` intent using LLMs.
+Now that we know what `Ìntent Detection` is and why it is useful, let's look at a *real-world* example of how you could `detect` intent using LLMs.
 
-In this example, we will operate a fictional recipe chatbot where people can in a QA fashion ask questions about a recipe and also get recipe recommendations. For our end-users, they can either chat in the context of a `recipe` or in a more general `QA` context. This means that we have two distinct `ContextTypes` to consider based on the user's actions:
+In this example, we will operate a fictional recipe chatbot where people can in a QA fashion ask questions about a recipe and also get recipe recommendations. Our end-users, can either chat in the context of a `recipe` or a more general `QA` context. 
+
+This means that we have two distinct `ContextTypes` to consider based on the user's actions:
 1. `RECIPE`: queries in the context of a recipe 
 2. `GENERAL`: more general queries not strictly connected to a specific recipe.
 
@@ -57,7 +135,7 @@ After talking with our product team and some clients, we understand that to a st
 5. `GENERAL_QA`: General QA with the chatbot
 6. `GENREAL_RECOMMENDATION`: Queries related to getting recipe recommendations 
 
-To spice it up a bit we will be using `TypeScript` for this example, mainly as I have been doing quite a lot of `TS` and `JS` lately at my current workplace:
+To spice :fire: it up a bit we will be using `TypeScript` for this example, mainly as I have been doing quite a lot of `TS` and `JS` lately at my current workplace.
 
 The libraries we will be using:
 * `@langchain/openai`
@@ -195,7 +273,7 @@ async predictIntent(messages: Messages)
 
     });
 
-    const = chain = ChatPrimptTemplate
+    const = chain = ChatPromptTemplate
     .fromTemplate(FoodIntentDetectionPromptTemplate)
     .pipe(llm.withStructuredOutput(zDetectFoodIntentResponse));
 
@@ -262,3 +340,8 @@ Output 2:
 
 
 ## Closing remarks
+In this post, we explored *intent detection* in a bit more detail and why it is important for any AI or LLM-powered system. With the main goal of increasing the relevancy and accuracy of a user's query in a QA/search-based system.
+
+We also demonstrated how you could use LLMs such as `gpt-4o` to detect *intent* in a fictional QA system. Intent detection is not just a technical necessity but a strategic advantage in building intelligent, user-centric LLM-powered systems.
+
+Even if we used `gpt-4o` in this example, there are many relevant lower latency alternatives such as `haiku` from Antrophic. And if you have a few 100s of examples other transformer-based approaches such as `FastFit` or `SetFit` are also interesting. Thanks for reading and until the next time :wave:!
