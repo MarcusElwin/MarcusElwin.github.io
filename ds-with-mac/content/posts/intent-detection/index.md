@@ -176,6 +176,8 @@ The intent we can deduce based on the query above is the following:
 
 To model this we want to use <cite>`zod`[^3]</cite>. Luckily for us, many LLM(s) are good at `functionCalling` and extracting `structuredOutput` based on a provided schema.
 
+[^3]: This is somewhat similar to `Pydantic` in Python.
+
 A `zod` object for our task could look like the below:
 {{< highlight typescript "linenos=inline, style=monokailight" >}}
 import { z } from 'zod';
@@ -193,8 +195,6 @@ const zDetectFoodIntentResponse = z.object({
         })
       )
 });
-
-[^3]: This is somewhat similar to `Pydantic` in Python.
 
 /* Infer type */
 type FoodIntentDetectionResponse = z.infer<typeof zDetectFoodIntentResponse>;
