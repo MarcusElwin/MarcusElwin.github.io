@@ -8,7 +8,7 @@ author: Marcus Elwin
 
 draft: false
 date: 2024-10-20T16:52:55+02:00
-lastmod: 
+lastmod: 2024-10-25T13:52:55+02:00
 expiryDate: 
 publishDate: 
 
@@ -203,7 +203,7 @@ These issues aren't going to disappear just because we're using LLMs. This is on
 
 ## Issue #3: The Inconsistent Nature of Data Science Roles Across Companies
 > Data Scientist? What do you do? I mean, for real? Can't you help me with this dashboard and a SQL query to get my ad-hoc nonreusable insights that I will probably forget I asked about?
-> — **Random Coverker in 2024**
+> — **Random Co-worker in 2024**
 >
 
 {{< figure src="/pic_issue_3.png" alt="#Issue3" title="Fig 3. Unfortunate that you don't have as many arms as responsibilities. Source: Author." style="display: block; margin-left: auto; margin-right: auto; width: 50%; max-width: 50%;" >}}
