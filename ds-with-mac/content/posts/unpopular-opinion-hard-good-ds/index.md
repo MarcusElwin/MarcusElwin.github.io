@@ -37,6 +37,8 @@ The data science landscape has evolved rapidly 🌐, especially with the rise of
 
 In this article, I'll share my thoughts and experiences on the challenges data scientists face today. We'll look at what it means to be a **V-shaped data scientist**t 📊, how data quality issues impact performance ⚠️, the importance of deep domain knowledge 🧠, and the blurred lines between *DataOps, MLOps, AIOps*, and traditional *DevOps* 🔄. My goal is to shed light on the realities of this profession and why the path to becoming a genuinely skilled data scientist is more demanding than ever.
 
+**Disclaimer**: The qoutes may or may not be inspired by real people. All images are AI generated.
+
 ## What is a good Data Scientist?
 > So you say you want to do Deep Learning, we don't do any learning here. Rather unlearning. So, focus on Data Engineering instead.  
 > — **Random Employer in 2015**
