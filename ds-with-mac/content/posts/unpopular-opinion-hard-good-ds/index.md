@@ -37,6 +37,8 @@ The data science landscape has evolved rapidly 🌐, especially with the rise of
 
 In this article, I'll share my thoughts and experiences on the challenges data scientists face today. We'll look at what it means to be a **V-shaped data scientist**t 📊, how data quality issues impact performance ⚠️, the importance of deep domain knowledge 🧠, and the blurred lines between *DataOps, MLOps, AIOps*, and traditional *DevOps* 🔄. My goal is to shed light on the realities of this profession and why the path to becoming a genuinely skilled data scientist is more demanding than ever.
 
+**Disclaimer**: The quotes may or may not be inspired by real people. All images are AI generated.
+
 ## What is a good Data Scientist?
 > So you say you want to do Deep Learning, we don't do any learning here. Rather unlearning. So, focus on Data Engineering instead.  
 > — **Random Employer in 2015**
@@ -104,7 +106,10 @@ For more on the concept of the V-shaped data scientist, check out my detailed ar
 ## Issue #1 - High expectations but no data or data strategy
 > We need to do AI, especially GenAI and LLMs. Our competitors are ahead of us with this AI thing. ChatGPT right? Make a chatbot. Make something cool. And by the way, we have no data available for the first year you work here. Privacy issues. GDPR.
 > — **Random Manager in 2023**
-> 
+>
+
+{{< figure src="/pic_issue_1.png" alt="#Issue1" title="Fig 1. High expectations without any clear strategy, makes it hard for AI as well. Source: Author." style="display: block; margin-left: auto; margin-right: auto; width: 50%; max-width: 50%;" >}}
+
 AI is now on every board and company wish list. Since the inception of ChatGPT in late 2022, there's been a rush to become "AI-driven," with many businesses eager to integrate AI capabilities into their products. Implementing AI using Large Language Models (LLMs) may seem more effortless than ever, but the reality is far more complex.
 
 As a data scientist working to bring ML systems or LLMs into production, I've encountered several vital challenges that reveal a gap between expectations and reality. Regardless of whether we call it AI, ML, or LLM, the success of these technologies hinges on having a solid foundation in place. 
@@ -140,7 +145,9 @@ These challenges highlight a common theme: **high expectations but a lack of fou
 
 ## Issue #2 - AI, GenAI, and LLM hype everyone is now "AI" specialists
 > AI, AI for real came in 2022 right with ChatGPT; I have done 5 courses in Prompt Engineering, which is not that hard, right? It works when I try on my oversimplified, non-realistic version of reality on my local machine, which does not consider scale or cost. So chop, chop, make it work. 
-> — **Random Manager / non AI Coverker in 2024**
+> — **Random Manager / non AI Co-worker in 2024**
+>
+{{< figure src="/pic_issue_2.png" alt="#Issue2" title="Fig 2. There are too many false AI prophets these days. Source: Author." style="display: block; margin-left: auto; margin-right: auto; width: 50%; max-width: 50%;" >}}
 
 Since the launch of Large Language models like GPT, the AI landscape has experienced an explosion of interest, driving businesses to position themselves as "AI-driven" almost overnight. While the increased attention to AI has sparked innovation, it has also led to misconceptions and unrealistic expectations. Many organizations quickly jump on the AI bandwagon without truly understanding what it means to implement these technologies effectively.
 
@@ -197,6 +204,10 @@ These issues aren't going to disappear just because we're using LLMs. This is on
 ## Issue #3: The Inconsistent Nature of Data Science Roles Across Companies
 > Data Scientist? What do you do? I mean, for real? Can't you help me with this dashboard and a SQL query to get my ad-hoc nonreusable insights that I will probably forget I asked about?
 > — **Random Coverker in 2024**
+>
+
+{{< figure src="/pic_issue_3.png" alt="#Issue3" title="Fig 3. Unfortunate that you don't have as many arms as responsibilities. Source: Author." style="display: block; margin-left: auto; margin-right: auto; width: 50%; max-width: 50%;" >}}
+
 
 Data Scientist was once hailed as the sexiest job of the 21st century [^7], but now AI Engineer seems to be taking that spot. However, even before this shift, it was often unclear what a Data Scientist was actually supposed to do. The responsibilities of a Data Scientist can vary widely depending on the company, industry, and even the team they're a part of. This inconsistency has led to confusion for both employers and professionals trying to build their careers.
 
@@ -233,6 +244,9 @@ Data Scientist was once hailed as the sexiest job of the 21st century [^7], but 
 ## Issue #4: The Data Quality Problem
 > Ah, data, my dear friend, foe, and partner. What would I do without you? Use LLMs to generate data, perhaps? But that can be bad, you say?  
 > — **Random Data Scientist in 2024**
+>
+
+{{< figure src="/pic_issue_4.png" alt="#Issue4" title="Fig 4. Garbage in equals Garbage out. Source: Author." style="display: block; margin-left: auto; margin-right: auto; width: 50%; max-width: 50%;" >}}
 
 Garbage in equals garbage out—let's repeat it: GIGO, GIGO. Data quality is and will remain a critical issue at many companies, even if you use all the cool LLM-based features available today. If there's no data strategy or plan to make data accessible, the quality of the model doesn't matter. From my experience, almost every place I've worked has had issues with data, whether it's about quality, accessibility, or integration.
 
@@ -244,7 +258,10 @@ However, it's still surprising that so many companies don't fully understand the
 ## Issue #5: The need for deep domain knowledge 
 > Aren't you a "scientist"? Shouldn't you know everything by heart, i.e., legal, finance, sourcing, etc.? It can't be that hard. I have worked with this for 10+ years, so I shouldn't have to tell you how the domain works; use ChatGPT. Why should I provide guidance and help you with labeling?
 > — **Random Domain Expert 2022-2023**
-> 
+>
+
+{{< figure src="/pic_issue_5.png" alt="#Issue5" title="Fig 5. Data Scientists also needs to be Domain Scientists. Source: Author." style="display: block; margin-left: auto; margin-right: auto; width: 50%; max-width: 50%;" >}}
+
 There is a massive potential for LLMs and LLM Agents. Who knows—this might be the cusp of achieving AGI (*Artificial General Intelligence*) or even ASI (*Artificial Superintelligence*). But, even with this optimism, I still see LLMs and agents having a hard time in their current form becoming genuine generalist problem solvers. This means that profound domain expertise will continue to be essential in the coming years. 
 
 However, being a data scientist, it's challenging to be a legal or finance expert or possess in-depth knowledge of other adjacent domains. This is where collaboration becomes crucial. Working alongside domain experts will be even more critical, as their insights can guide the proper framing of problems, ensure that data-driven solutions are relevant, and help validate AI model outcomes.
@@ -258,7 +275,10 @@ While LLMs and other AI tools continue to advance, deep domain knowledge remains
 
 ## Issue #6: DataOps, MLOps, AIOps, LLMOps, or Just DevOps?
 > "Wait, so you're telling me I need to understand how data pipelines work, manage model deployment, optimize LLMs, AND maintain cloud infrastructure? I thought I just needed to train a model! Can we call it 'Ops' and pretend I know what I'm doing?" — **Random Data Scientist in 2024**
-> 
+>
+
+{{< figure src="/pic_issue_6.png" alt="#Issue6" title="Fig 6. Why not keep it simple and call it Ops? Source: Author." style="display: block; margin-left: auto; margin-right: auto; width: 50%; max-width: 50%;" >}}
+
 I'm a big advocate of end-to-end (E2E) ML systems, and you can find more of my thoughts on this topic in my previous writings [[9](https://dswithmac.com/posts/testing-ml/)]. In these systems, the AI or ML component is often a small but critical part of a larger ecosystem that requires testing, monitoring, tracing, and other operational practices. This still holds for LLM-based systems, giving rise to the now-growing field of LLMOps. 
 
 However, it can be rather discombobulating for practitioners to differentiate between MLOps, DataOps, AIOps, and LLMOps. Aren't these just variations of DevOps? In my experience, what you call it matters less than understanding the need to operationalize these stochastic systems effectively. It's crucial to focus on managing these systems in production, as it will always differ from experimentation or development (DEV) environments.
@@ -287,7 +307,10 @@ While the terminology may vary, the principles remain consistent: AI systems req
 
 ## Issue #7: The Impact of Rapid Technological Change
 > "Wait, so the new library/model or LLM isn't compatible with our current stack, but is it faster and cheaper? It can reason, you say... Awesome. I'll just figure out how to make it fit, like a square peg in a round hole." - **Problem-Solving EM, 2024**
-> 
+>
+
+{{< figure src="/pic_issue_7_v2.png" alt="#Issue7" title="Fig 7. Too many languages, frameworks and models to keep track off. Source: Author." style="display: block; margin-left: auto; margin-right: auto; width: 50%; max-width: 50%;" >}}
+
 If you have chosen the path of a Data Scientist, you're likely someone who enjoys learning and experimenting with new technology. However, compared to a few years ago, the pace of change in this field has accelerated drastically. We see new research papers released almost daily and new libraries that promise to do things better than before. Emerging programming languages have also entered the mix—should you stick with `Python,` or explore newer ones like `Rust,` `TypeScript,` or even `Zig`? Regarding databases, should you continue using `Postgres` with `pgvector` enabled, or should you switch to a newer vector database like `Qdrant`?
 
 The choices don't stop there. Should you buy or build? Fine-tune or prompt-engineer, especially as LLM capabilities continue to improve? What tasks are still considered core to Data Science? Sure, evaluation (evals) is essential, but how engaging is it to write evals all day? And with the rise of techniques like using LLMs as evaluators, is there even a need for traditional approaches anymore?
